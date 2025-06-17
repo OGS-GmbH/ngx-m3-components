@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  width: var(--width, 100%);
+  height: var(--height, 100%);
+  border-radius: var(--border-radius, none);
+  animation-name: opacity-fade;
+  animation-duration: 1s;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes opacity-fade {
+  from {
+    filter: brightness(0.95);
+  }
+
+  to {
+    filter: brightness(1);
+  }
+}

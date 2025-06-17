@@ -1,0 +1,18 @@
+@use "@angular/material" as mat;
+
+@mixin color($theme) {
+  $theme-type: mat.get-theme-type($theme);
+
+  // stylelint disable-next-line selector-type-no-unknown
+  ogs-m3-skeleton {
+    background-color: mat.get-theme-color($theme, neutral, if($theme-type == light, 80, 20));
+  }
+}
+
+@mixin theme($theme) {
+  $has-color: mat.theme-has($theme, color);
+
+  @if $has-color {
+    @include color($theme);
+  }
+}

@@ -1,0 +1,14 @@
+/* stylelint-disable-next-line selector-type-no-unknown */
+:host {
+	display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: auto;
+}
+
+svg {
+  width: inherit;
+  height: inherit;
+}
+

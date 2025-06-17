@@ -1,0 +1,72 @@
+@use "@angular/material" as mat;
+@use "sass:map";
+
+@mixin color-variables($colors) {
+  $border: map-get($colors, "border");
+  $border-checked: map-get($colors, "border-checked");
+  $border-width: map-get($colors, "border-width");
+  $outer-indicator: map-get($colors, "outer-indicator");
+  $inner-indicator: map-get($colors, "inner-indicator");
+
+  :root {
+    --ogs-m3-radio-badge-border: #{$border};
+    --ogs-m3-radio-badge-border-checked: #{$border-checked};
+    --ogs-m3-radio-badge-border-width: #{$border-width};
+    --ogs-m3-radio-badge-outer-indicator: #{$outer-indicator};
+    --ogs-m3-radio-badge-inner-indicator: #{$inner-indicator};
+  }
+}
+
+@mixin color($theme) {
+  .ogs-m3-radio-badge {
+    padding: 16px;
+    border-radius: 8px;
+    border: var(--ogs-m3-radio-badge-border-width) solid var(--ogs-m3-radio-badge-border);
+
+    &.mat-mdc-radio-checked {
+      border-color: var(--ogs-m3-radio-badge-border-checked) !important;
+    }
+
+    .mdc-radio__outer-circle {
+      border-color: var(--ogs-m3-radio-badge-outer-indicator) !important;
+    }
+
+    .mdc-radio__inner-circle {
+      border-color: var(--ogs-m3-radio-badge-inner-indicator) !important;
+    }
+  }
+}
+
+@mixin theme($theme) {
+  $has-color: mat.theme-has($theme, color);
+
+  @if $has-color {
+    @include color-variables((
+      border: mat.get-theme-color($theme, surface-container-high),
+      border-checked: mat.get-theme-color($theme, primary),
+      border-width: "3px",
+      inner-indicator: mat.get-theme-color($theme, primary),
+      outer-indicator: mat.get-theme-color($theme, primary)
+    ));
+    @include color($theme);
+  }
+}
+
+@mixin override($theme, $overrides) {
+  $border: map-get($overrides, "border");
+  $border-checked: map-get($overrides, "border-checked");
+  $border-width: map-get($overrides, "border-width");
+  $inner-indicator: map-get($overrides, "inner-indicator");
+  $outer-indicator: map-get($overrides, "outer-indicator");
+
+  @if $border == null or $border-checked == null or $border-width == null or $inner-indicator == null or $outer-indicator == null {
+    @error "Expected properties not specified.";
+  }
+
+  $has-color: mat.theme-has($theme, color);
+
+  @if $has-color {
+    @include color-variables($overrides);
+    @include color($theme);
+  }
+}
