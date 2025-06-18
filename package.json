@@ -1,18 +1,18 @@
 {
 	"name": "@ogs-gmbh/ngx-m3-components",
-	"version": "0.0.0",
-  "description": "A collection of reusable, customizable UI components built with Angular and Material 3.",
-  "keywords": [
-    "angular",
-    "material",
-    "material3",
-    "angular-material",
-    "custom-components",
-    "ui-library"
-  ],
+	"version": "1.0.0",
+	"description": "A collection of reusable, customizable UI components built with Angular and Material 3.",
+	"keywords": [
+		"angular",
+		"material",
+		"material3",
+		"angular-material",
+		"custom-components",
+		"ui-library"
+	],
 	"homepage": "https://github.com/OGS-GmbH/ngx-m3-components?tab=readme-ov-file",
-  "bugs": "https://github.com/OGS-GmbH/ngx-m3-components/issues",
-  "license": "MIT",
+	"bugs": "https://github.com/OGS-GmbH/ngx-m3-components/issues",
+	"license": "MIT",
 	"author": "OGS GmbH",
 	"contributors": [
 		{
