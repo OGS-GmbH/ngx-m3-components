@@ -1,7 +1,8 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { ToggleComponent } from "../components/toggle/toggle.component";
-import { ToggleChildComponent } from "../components/toggle/components/toggle-child.component";
+import { ToggleChildComponent } from "../components/toggle/toggle-child.component";
+import { ElementRefToggleTriggerDirective, MatRadioGroupRefToggleTriggerDirective, NativeRefToggleTriggerDirective } from "../public-api";
 
 /* eslint-disable @tseslint/no-extraneous-class */
 @NgModule({
@@ -10,11 +11,17 @@ import { ToggleChildComponent } from "../components/toggle/components/toggle-chi
   ],
   declarations: [
     ToggleComponent,
-    ToggleChildComponent
+    ToggleChildComponent,
+    ElementRefToggleTriggerDirective,
+    MatRadioGroupRefToggleTriggerDirective,
+    NativeRefToggleTriggerDirective
   ],
   exports: [
     ToggleComponent,
-    ToggleChildComponent
+    ToggleChildComponent,
+    ElementRefToggleTriggerDirective,
+    MatRadioGroupRefToggleTriggerDirective,
+    NativeRefToggleTriggerDirective
   ]
 })
 export class ToggleModule {}
