@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/OGS-GmbH/ngx-m3-components/compare/v1.0.0...v1.1.0) (2025-07-08)
+
+
+### Features
+
+* **toggle:** ng-templates ([c27f3fb](https://github.com/OGS-GmbH/ngx-m3-components/commit/c27f3fb8305fb7dc190e63cb7e7cae7d26b152cb))
+
 ## 1.0.0 (2025-06-18)
 
 
