@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, ContentChildren, Input, inject, QueryList, Renderer2, booleanAttribute, ElementRef, Output, EventEmitter, OnChanges, SimpleChanges, OnDestroy, AfterViewInit } from "@angular/core";
-import { ToggleChildComponent } from "./components/toggle-child.component";
+import { ChangeDetectionStrategy, Component, ContentChildren, Input, QueryList, booleanAttribute, Output, EventEmitter, AfterViewInit, WritableSignal, signal, Signal, ViewChild, ViewContainerRef, EmbeddedViewRef, OnDestroy } from "@angular/core";
+import { ToggleDelegate } from "./toggle.type";
+import { ToggleChildComponent } from "./toggle-child.component";
 
 @Component({
   selector: "ogs-m3-toggle",
@@ -7,161 +8,138 @@ import { ToggleChildComponent } from "./components/toggle-child.component";
   styleUrl: "toggle.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ToggleComponent implements OnChanges, OnDestroy, AfterViewInit {
-  private _renderer2: Renderer2 = inject(Renderer2);
+export class ToggleComponent implements AfterViewInit, OnDestroy {
+  private _index: WritableSignal<number> = signal<number>(0);
 
-  private _unlistener: Array<(() => void)> | null = null;
+  public index: Signal<number> = this._index.asReadonly();
 
-  private _currentVisibleIndex: number = 0;
+  /* eslint-disable-next-line @unicorn/no-useless-undefined */
+  private _name: WritableSignal<string | undefined> = signal<string | undefined>(undefined);
+
+  public name: Signal<string | undefined> = this._name.asReadonly();
 
   @Input({ required: false, transform: booleanAttribute })
   public reverse: boolean = false;
 
-  /**
-   * Set the visibile child name, that should be initially shown when the name matches.
-   */
   @Input({ required: false })
-  public defaultVisibleName?: string;
-
-  /*
-   * Set the visible index of some child, that should be initially shown when the index matches.
-   */
-  @Input({ required: false })
-  public defaultVisibleIndex?: number;
+  public defaultName?: string;
 
   @Input({ required: false })
-  public triggerElement?: HTMLElement;
-
-  @Input({ required: false })
-  public triggerRef?: ElementRef<unknown>;
-
-  @Input({ required: false })
-  public eventName: string | string[] = "click";
+  public defaultIndex?: number;
 
   @Output()
-  public toggle: EventEmitter<string | undefined> = new EventEmitter<string | undefined>();
+  public toggleDelegate: EventEmitter<ToggleDelegate> = new EventEmitter<ToggleDelegate>();
 
   @ContentChildren(ToggleChildComponent)
-  private _children!: QueryList<ToggleChildComponent>;
+  protected children: QueryList<ToggleChildComponent> | undefined;
 
-  private _updateByDirection (): void {
-    if (this.reverse) {
-      this._currentVisibleIndex === 0
-        ? this._currentVisibleIndex = this._children.length - 1
-        : --this._currentVisibleIndex;
+  @ViewChild("viewContainerRef", { read: ViewContainerRef })
+  protected viewContainerRef!: ViewContainerRef;
+
+  private _embeddedViewRef: EmbeddedViewRef<unknown> | null = null;
+
+  private _currentToggleChild: ToggleChildComponent | null = null;
+
+  private _updateNameByIndex (index: number): void {
+    const child: ToggleChildComponent | undefined = this.children?.get(index);
+    const childName: string | undefined = child?.name;
+
+    this._name.set(childName);
+  }
+
+  private _handleToggleDelegate (visibleName: string | undefined, handler: () => void): void {
+    if (!this.toggleDelegate.observed) {
+      handler();
 
       return;
     }
 
-    this._currentVisibleIndex === this._children.length - 1
-      ? this._currentVisibleIndex = 0
-      : ++this._currentVisibleIndex;
-  }
-
-  private _getIndexByName (_name: string): number | null {
-    let foundIndex: number | null = null;
-
-    this._children.forEach((child: ToggleChildComponent, childIndex: number): void => {
-      if (child.name !== _name)
-        return;
-
-      foundIndex = childIndex;
-    });
-
-    return foundIndex;
-  }
-
-  private _appendToUnlistener (callback: () => void): void {
-    this._unlistener === null
-      ? this._unlistener = [ callback ]
-      : this._unlistener.push(callback);
-  }
-
-  private _toggleChildByName (_name: string): void {
-    this._children.forEach((child: ToggleChildComponent, childIndex: number): void => {
-      const isVisible: boolean = child.name !== undefined && child.name === _name;
-
-      if (!isVisible) {
-        child.hide();
-
-        return;
-      }
-
-      this._currentVisibleIndex = childIndex;
-      child.show();
-      this.toggle.emit(child.name);
+    this.toggleDelegate.emit({
+      complete: handler,
+      name: visibleName
     });
   }
 
-  private _toggleChildByIndex (index: number): void {
-    this._children.forEach((child: ToggleChildComponent, childIndex: number): void => {
-      const isVisible: boolean = index === childIndex;
-
-      if (!isVisible) {
-        child.hide();
-
+  public showName (visibleName: string): void {
+    this.children?.forEach((toggleChild: ToggleChildComponent, index: number): void => {
+      if (toggleChild.name !== visibleName)
         return;
-      }
 
-      this._currentVisibleIndex = childIndex;
-      child.show();
-      this.toggle.emit(child.name);
-    });
-  }
-
-  private _attachListener (element: HTMLElement): void {
-    const eventName: string[] = Array.isArray(this.eventName) ? this.eventName : [ this.eventName ];
-
-    eventName.forEach((eventNameItem: string): void => {
-      this._appendToUnlistener(
-        this._renderer2.listen(element, eventNameItem, this._handleClickTrigger.bind(this))
+      this._handleToggleDelegate(
+        toggleChild.name,
+        () => {
+          this._embeddedViewRef?.destroy();
+          this._currentToggleChild?.ngOnDestroy();
+          this._index.set(index);
+          this._updateNameByIndex(index);
+          this._embeddedViewRef = this.viewContainerRef.createEmbeddedView(toggleChild.templateRef);
+          this._currentToggleChild = toggleChild;
+        }
       );
     });
   }
 
-  private _detachListener (): void {
-    this._unlistener?.forEach((unlistenerItem: () => void) => {
-      unlistenerItem();
-    });
-    this._unlistener = null;
-  }
-
-  private _handleClickTrigger (): void {
-    this._updateByDirection();
-    this._toggleChildByIndex(this._currentVisibleIndex);
-  }
-
-  public showName (_name: string): void {
-    this._toggleChildByName(_name);
-  }
-
-  public ngOnChanges (changes: SimpleChanges): void {
-    const shouldHandleTriggerChange: boolean = changes[ "triggerElement" ] !== undefined || changes[ "triggerRef" ] !== undefined;
-
-    if (shouldHandleTriggerChange) {
-      const element: HTMLElement | undefined = (changes[ "triggerElement" ]?.currentValue ?? (changes[ "triggerRef" ]?.currentValue as typeof this.triggerRef)?.nativeElement) as HTMLElement | undefined;
-
-      this._detachListener();
-
-      if (element === undefined)
+  public showIndex (visibleIndex: number): void {
+    this.children?.forEach((toggleChild: ToggleChildComponent, index: number): void => {
+      if (index !== visibleIndex)
         return;
 
-      this._attachListener(element);
-    }
+      this._handleToggleDelegate(
+        toggleChild.name,
+        () => {
+          this._embeddedViewRef?.destroy();
+          this._currentToggleChild?.ngOnDestroy();
+          this._index.set(index);
+          this._updateNameByIndex(index);
+          this._embeddedViewRef = this.viewContainerRef.createEmbeddedView(toggleChild.templateRef);
+          this._currentToggleChild = toggleChild;
+        }
+      );
+    });
+  }
+
+  public showNext (): void {
+    if (this.children === undefined)
+      return;
+
+    const index: number = this._index();
+    const nextIndex: number = index === this.children.length - 1
+      ? 0
+      : index + 1;
+
+    this.showIndex(nextIndex);
+  }
+
+  public showPrevious (): void {
+    if (this.children === undefined)
+      return;
+
+    const index: number = this._index();
+    const nextIndex: number = index === 0
+      ? this.children.length - 1
+      : index - 1;
+
+    this.showIndex(nextIndex);
+  }
+
+  public toggle (): void {
+    this.reverse
+      ? this.showPrevious()
+      : this.showNext();
   }
 
   public ngAfterViewInit (): void {
-    if (this.defaultVisibleName !== undefined) {
-      this._toggleChildByName(this.defaultVisibleName);
-
-      return;
-    } else if (this.defaultVisibleIndex !== undefined)
-      this._currentVisibleIndex = this.defaultVisibleIndex;
-
-    this._toggleChildByIndex(this._currentVisibleIndex);
+    if (this.defaultName !== undefined)
+      this.showName(this.defaultName);
+    /* eslint-disable-next-line no-negated-condition, @unicorn/no-negated-condition */
+    else if (this.defaultIndex !== undefined)
+      this.showIndex(this.defaultIndex);
+    else
+      this.showIndex(this._index());
   }
 
   public ngOnDestroy (): void {
-    this._detachListener();
+    this._embeddedViewRef?.destroy();
+    this._embeddedViewRef = null;
   }
 }
