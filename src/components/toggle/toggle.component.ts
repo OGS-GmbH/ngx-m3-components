@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ContentChildren, Input, QueryList, booleanAttribute, Output, EventEmitter, AfterViewInit, WritableSignal, signal, Signal, ViewChild, ViewContainerRef, computed, EmbeddedViewRef, OnDestroy } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ContentChildren, Input, QueryList, booleanAttribute, Output, EventEmitter, AfterViewInit, WritableSignal, signal, Signal, ViewChild, ViewContainerRef, EmbeddedViewRef, OnDestroy } from "@angular/core";
 import { ToggleDelegate } from "./toggle.type";
 import { ToggleChildComponent } from "./toggle-child.component";
 
@@ -13,12 +13,10 @@ export class ToggleComponent implements AfterViewInit, OnDestroy {
 
   public index: Signal<number> = this._index.asReadonly();
 
-  /* eslint-disable-next-line @unicorn/consistent-function-scoping */
-  public name: Signal<string | undefined> = computed((): string | undefined => {
-    const currentIndex: number = this._index();
+  /* eslint-disable-next-line @unicorn/no-useless-undefined */
+  private _name: WritableSignal<string | undefined> = signal<string | undefined>(undefined);
 
-    return this.children?.get(currentIndex)?.name;
-  });
+  public name: Signal<string | undefined> = this._name.asReadonly();
 
   @Input({ required: false, transform: booleanAttribute })
   public reverse: boolean = false;
@@ -41,6 +39,13 @@ export class ToggleComponent implements AfterViewInit, OnDestroy {
   private _embeddedViewRef: EmbeddedViewRef<unknown> | null = null;
 
   private _currentToggleChild: ToggleChildComponent | null = null;
+
+  private _updateNameByIndex (index: number): void {
+    const child: ToggleChildComponent | undefined = this.children?.get(index);
+    const childName: string | undefined = child?.name;
+
+    this._name.set(childName);
+  }
 
   private _handleToggleDelegate (visibleName: string | undefined, handler: () => void): void {
     if (!this.toggleDelegate.observed) {
@@ -66,6 +71,7 @@ export class ToggleComponent implements AfterViewInit, OnDestroy {
           this._embeddedViewRef?.destroy();
           this._currentToggleChild?.ngOnDestroy();
           this._index.set(index);
+          this._updateNameByIndex(index);
           this._embeddedViewRef = this.viewContainerRef.createEmbeddedView(toggleChild.templateRef);
           this._currentToggleChild = toggleChild;
         }
@@ -84,6 +90,7 @@ export class ToggleComponent implements AfterViewInit, OnDestroy {
           this._embeddedViewRef?.destroy();
           this._currentToggleChild?.ngOnDestroy();
           this._index.set(index);
+          this._updateNameByIndex(index);
           this._embeddedViewRef = this.viewContainerRef.createEmbeddedView(toggleChild.templateRef);
           this._currentToggleChild = toggleChild;
         }
