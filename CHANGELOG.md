@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/OGS-GmbH/ngx-m3-components/compare/v1.1.0...v1.2.0) (2025-07-17)
+
+
+### Features
+
+* **number-input-directive:** add key bypass ([#5](https://github.com/OGS-GmbH/ngx-m3-components/issues/5)) ([873c52f](https://github.com/OGS-GmbH/ngx-m3-components/commit/873c52f031d146c9fa256523ad8072eb4333f55a))
+
 ## [1.1.0](https://github.com/OGS-GmbH/ngx-m3-components/compare/v1.0.0...v1.1.0) (2025-07-08)
 
 
