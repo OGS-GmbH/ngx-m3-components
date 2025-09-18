@@ -1,0 +1,20 @@
+$ogs-token-prefix: "ogs";
+
+@mixin provide-tokens($tokens, $selector: ':root') {
+  #{$selector} {
+    @each $key, $value in $tokens {
+      @if $value != null {
+        #{get-prefixed-token($key)}: #{$value};
+      }
+    }
+  }
+}
+
+
+@function get-prefixed-token($token){
+	@return --#{$ogs-token-prefix}-#{$token};
+}
+
+@function slot($token){
+ @return var(#{get-prefixed-token($token)});
+}

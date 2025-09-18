@@ -1,0 +1,11 @@
+.toast-area{
+	height: max-content;
+	display: inline-flex;
+	flex-direction: column;
+	gap: 8px;
+	width: max-content;
+}
+
+.toast-item {   
+  will-change: transform;
+}
