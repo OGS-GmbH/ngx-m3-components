@@ -1,0 +1,9 @@
+<div [class]="{'toast': true,'toast--error': status() === statusTypes.ERROR, 'toast--success': status() === statusTypes.SUCCESS}">
+	<button class="toast__close" mat-icon-button (click)="onCloseClick()">
+  ✖
+	</button>
+	<section class="toast__content">
+		<ng-content />
+	</section>
+</div>
+

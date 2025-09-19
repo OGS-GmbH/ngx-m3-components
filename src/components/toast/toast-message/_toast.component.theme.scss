@@ -1,0 +1,86 @@
+@use "@angular/material" as mat;
+@use "@ogs/ngx-m3-themes" as ngx-m3-themes;
+@use "../../../styles/utils/token.utils" as token-utils;
+@use "sass:map";
+
+@function get-tokens($theme){
+	$has-color: mat.theme-has($theme, color);
+	$tokens: (
+		base:(
+			toast-border-radius: 8px,
+			toast-border-width: 1px,
+			toast-width: 300px,
+  	toast-border-style: solid,
+		),
+		typography:(),	
+		density:()
+	);
+
+		@if($has-color){
+		 $color-tokens: (
+      toast-shadow-color: mat.get-theme-color($theme, 'on-surface'),
+      toast-border-color: mat.get-theme-color($theme, 'outline'),
+      toast-border-color-error: mat.get-theme-color($theme, 'error'),
+      toast-border-color-success: green,
+      toast-background-color: mat.get-theme-color($theme, 'surface'),
+      toast-background-color-success: rgba(green, 0.3),
+      toast-background-color-error: rgba(mat.get-theme-color($theme, 'error'), 0.3),
+    );
+
+    $tokens: map.merge($tokens, (color: $color-tokens));
+
+  } @else {
+    $fallback-color-tokens: (
+      toast-shadow-color: black,
+      toast-border-color: black,
+      toast-border-color-error: red,
+      toast-border-color-success: green,
+      toast-background-color: white,
+      toast-background-color-success: rgba(green, 0.3),
+      toast-background-color-error: rgba(red, 0.3),
+    );
+				
+			$tokens: map.merge($tokens, (color: $fallback-color-tokens));
+			}
+
+		@return $tokens;
+}
+
+@mixin base($theme){
+	$base-tokens: map.get(get-tokens($theme), base);
+	@include token-utils.provide-tokens($base-tokens);
+}
+
+@mixin color($theme){
+	$color-tokens: map.get(get-tokens($theme), color);
+	@include token-utils.provide-tokens($color-tokens);
+}
+
+@mixin typography($theme){
+	$typography-tokens: map.get(get-tokens($theme), typography);
+	@include token-utils.provide-tokens($typography-tokens);
+}
+
+@mixin density($theme){
+	$density-tokens: map.get(get-tokens($theme), density);
+	@include token-utils.provide-tokens($density-tokens);
+}
+
+@function _get-namespace-config($theme){
+	@return (
+		namespace: toast,
+		tokens: token-utils.get-all-namespace-tokens(get-tokens($theme), toast)
+	);
+}
+
+@mixin overrides($theme, $tokens: ()){
+	@include token-utils.override-tokens($tokens, _get-namespace-config($theme));
+}
+
+@mixin theme($theme) {
+  @include base($theme);
+  @include color($theme);
+  @include typography($theme);
+  @include density($theme);
+}
+
