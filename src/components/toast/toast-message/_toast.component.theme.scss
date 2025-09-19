@@ -8,7 +8,8 @@
 	$tokens: (
 		base:(
 			toast-border-radius: 8px,
-			toast-width: 150px,
+			toast-border-width: 1px,
+			toast-width: 300px,
   	toast-border-style: solid,
 		),
 		typography:(),	
@@ -63,6 +64,17 @@
 @mixin density($theme){
 	$density-tokens: map.get(get-tokens($theme), density);
 	@include token-utils.provide-tokens($density-tokens);
+}
+
+@function _get-namespace-config($theme){
+	@return (
+		namespace: toast,
+		tokens: token-utils.get-all-namespace-tokens(get-tokens($theme), toast)
+	);
+}
+
+@mixin overrides($theme, $tokens: ()){
+	@include token-utils.override-tokens($tokens, _get-namespace-config($theme));
 }
 
 @mixin theme($theme) {

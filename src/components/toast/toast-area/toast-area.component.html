@@ -1,9 +1,9 @@
 <div class="toast-area" [@stack]="toasts()?.length ?? 0">
   @if (toasts() && toasts()!.length > 0) {
     @for (toast of toasts()!; track toast.id) {
-     <app-toast class="toast-item" [id]="toast.id!">
+     <ogs-m3-toast class="toast-item" [id]="toast.id!" [status]="toast.status ?? 'NEUTRAL'">
 						<ng-container *ngComponentOutlet="getMatchingComponent(toast.kind); inputs: getMatchingInputs(toast.kind, toast)" />
-					</app-toast>
+					</ogs-m3-toast>
     }
   }
 </div>

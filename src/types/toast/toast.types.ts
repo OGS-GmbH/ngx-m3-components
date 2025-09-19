@@ -20,10 +20,3 @@ export interface ToastOf<Payload, Discriminator extends keyof Payload = keyof Pa
   kind: Discriminator;
   payload: Payload;
 }
-// eslint-disable-next-line @tseslint/typedef
-export const TOAST_DURATIONS = {
-  LONG: 10_000,
-  DEFAULT: 7000,
-  SHORT: 5000
-} as const;
-export type ToastDuration = typeof TOAST_DURATIONS[keyof typeof TOAST_DURATIONS];

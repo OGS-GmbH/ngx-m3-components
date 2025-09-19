@@ -1,8 +1,10 @@
 import { inject, Injectable } from "@angular/core";
 import { animationFrameScheduler, BehaviorSubject, Observable, Subscription, throttleTime, timer } from "rxjs";
 import { ToastConfig } from "../../types/toast/toast-config.types";
-import { TOAST_DURATIONS, UntypedToast } from "../../types/toast/toast.types";
+import { UntypedToast } from "../../types/toast/toast.types";
 import { TOAST_INJECTION_TOKEN } from "../../tokens/toast.token";
+
+const DEFAULT_DURATION: number = 6000;
 
 @Injectable({
   providedIn: "root"
@@ -32,10 +34,12 @@ export class ToastStoreService {
 
     this._toasts$.next([ ...this._toasts$.getValue(), toast ]);
 
-    // eslint-disable-next-line @tseslint/no-non-null-assertion
-    const timerSubscription: Subscription = timer(toast.ttl ?? TOAST_DURATIONS.DEFAULT).subscribe(() => this.removeToast(toast.id!));
+    if (!toast.isSticky) {
+      // eslint-disable-next-line @tseslint/no-non-null-assertion
+      const timerSubscription: Subscription = timer(toast.ttl ?? this._toastConfig.toastDefaultDuration ?? DEFAULT_DURATION).subscribe(() => this.removeToast(toast.id!));
 
-    this._timerSubscriptions.set(toast.id, timerSubscription);
+      this._timerSubscriptions.set(toast.id, timerSubscription);
+    }
 
     if (this._toasts$.getValue().length > this._toastConfig.maxNumberOfToasts)
       // eslint-disable-next-line @tseslint/no-non-null-assertion

@@ -9,7 +9,7 @@ import { TOAST_INJECTION_TOKEN } from '../../../tokens/toast.token';
 import { UntypedToast } from '../../../types/toast/toast.types';
 
 @Component({
-  selector: 'app-toast-area',
+  selector: 'ogs-m3-toast-area',
   standalone: true,
   imports: [ ToastComponent, NgComponentOutlet ],
   templateUrl: './toast-area.component.html',

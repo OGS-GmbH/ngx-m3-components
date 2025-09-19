@@ -3,7 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ToastService } from '../../../services/toast/toast.service';
 import { STATUS_TYPES, StatusType } from '../../../types/toast/toast.types';
 @Component({
-  selector: 'app-toast',
+  selector: 'ogs-m3-toast',
   standalone: true,
   imports: [ MatButtonModule ],
   templateUrl: './toast.component.html',

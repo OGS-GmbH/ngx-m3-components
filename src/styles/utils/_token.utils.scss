@@ -1,13 +1,43 @@
-$ogs-token-prefix: "ogs";
+$ogs-token-prefix: "ogs-m3";
+@use "sass:string";
+@use "sass:map";
 
-@mixin provide-tokens($tokens, $selector: ':root') {
-  #{$selector} {
-    @each $key, $value in $tokens {
-      @if $value != null {
-        #{get-prefixed-token($key)}: #{$value};
-      }
-    }
+@mixin provide-tokens($tokens) {
+			@each $key, $value in $tokens {
+					@if $value != null {
+							#{get-prefixed-token($key)}: #{$value};
+					}
+			}
+}
+
+@function get-all-namespace-tokens($tokens, $namespace) {
+  $base: remove-token-prefixes(map.get($tokens, base), $namespace);
+  $color: remove-token-prefixes(map.get($tokens, color), $namespace);
+  $typography: remove-token-prefixes(map.get($tokens, typography), $namespace);
+  $density: remove-token-prefixes(map.get($tokens, density), $namespace);
+  $all: ();
+  @each $map in ($base, $color, $typography, $density) {
+    $all: map.merge($all, $map);
   }
+
+  @return $all;
+}
+
+@function remove-token-prefixes($prefixed-tokens: (), $prefix) {
+  $tokens: ();
+  @each $key, $value in $prefixed-tokens {
+    $tokens: map.set($tokens, remove-token-prefix($key, $prefix), $value);
+  }
+  @return $tokens;
+}
+
+@function remove-token-prefix($prefixed-token, $prefix){
+  $prefix-part: "#{$prefix}-";
+  $as-str: "#{$prefixed-token}";
+  @if string.index($as-str, $prefix-part) == 1 {
+    @return string.slice($as-str, string.length($prefix-part) + 1);
+  }
+  @return $as-str;
 }
 
 
@@ -17,4 +47,17 @@ $ogs-token-prefix: "ogs";
 
 @function slot($token){
  @return var(#{get-prefixed-token($token)});
+}
+
+@mixin override-tokens($overrides: (), $namespace-config){
+	$namespace-name: map.get($namespace-config, namespace);
+	$namespace-tokens: map.get($namespace-config, tokens);
+
+	@each $token, $value in $overrides{
+		@if(map.has-key($namespace-tokens, $token)){
+			@include provide-tokens(("#{$namespace-name}-#{$token}": $value));
+		}@else{
+			@error "Override-name: #{$token} is not a valid override for #{$namespace-name}. Valid names are: #{map.keys($namespace-tokens)}";
+		}
+	}
 }

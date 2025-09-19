@@ -27,12 +27,16 @@ export class ToastService {
   /**
    * Show a toast
    * @param toast - the toast to display
+   *
+   * @return the assigned id of the toast
    */
-  public show (toast: UntypedToast): void {
+  public show (toast: UntypedToast): string {
     const toastId: string = crypto.randomUUID();
     const toastMessage: UntypedToast = { ...toast, id: toastId };
 
     this._toastStoreService.addToast(toastMessage);
+
+    return toastId;
   }
 
   /**
