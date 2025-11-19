@@ -1,8 +1,9 @@
 import {
+  ANGULAR_TEMPLATE_RULES_PRESET,
   ESLINT_JSON_RULES,
   ESLINT_MARKDOWN_RULES,
-  JS_RULES_PRESET,
-  TS_RULES_PRESET
+  getAngularTsPreset,
+  JS_RULES_PRESET
 } from "@ogs-gmbh/linter";
 import eslintJson from "@eslint/json";
 import eslintMarkdown from "@eslint/markdown";
@@ -12,8 +13,10 @@ import stylisticPlus from "@stylistic/eslint-plugin-plus";
 import stylisticTs from "@stylistic/eslint-plugin-ts";
 import tseslint from "typescript-eslint";
 import unicorn from "eslint-plugin-unicorn";
+import { defineConfig } from "eslint/config";
+import angular from "angular-eslint";
 
-export default tseslint.config(
+export default defineConfig(
   {
     plugins: {
       "@tseslint": tseslint.plugin,
@@ -22,7 +25,9 @@ export default tseslint.config(
       "@stylistic/ts": stylisticTs,
       "@stylistic/plus": stylisticPlus,
       "@markdown": eslintMarkdown,
-      "@json": eslintJson
+      "@json": eslintJson,
+      "@angular": angular.tsPlugin,
+      "@angular-template": angular.templatePlugin
     }
   },
   {
@@ -39,15 +44,25 @@ export default tseslint.config(
   },
   {
     files: [ "**/*.ts" ],
+    processor: angular.processInlineTemplates,
     languageOptions: {
       parser: tseslint.parser,
-      globals: globals.browser,
+      globals: { ...globals.browser },
       parserOptions: {
         projectService: true,
         tsconfigRootDir: import.meta.dirname
       }
     },
-    rules: TS_RULES_PRESET
+    rules: getAngularTsPreset({
+      selectorPrefix: "ogs-m3"
+    })
+  },
+  {
+    files: [ "**/*.html" ],
+    languageOptions: {
+      parser: angular.templateParser
+    },
+    rules: ANGULAR_TEMPLATE_RULES_PRESET
   },
   {
     files: [ "**/*.js", "**/*.mjs", "**/*.cjs" ],

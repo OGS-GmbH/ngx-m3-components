@@ -1,0 +1,45 @@
+@use "../../../styles/utils/token.utils" as token-utils;
+
+.toast{
+	border-radius: token-utils.slot(toast-border-radius);
+	box-sizing: border-box;
+	height: 100%;
+	width: token-utils.slot(toast-width);
+	padding: 10px;
+	display: grid;
+	grid-template-areas: "toast__content toast__close";
+	grid-template-columns: 1fr auto;
+	column-gap: 5px;
+	border-width: token-utils.slot(toast-border-width);
+	border-style: token-utils.slot(toast-border-style);
+
+	border-color: token-utils.slot(toast-border-color);
+	background-color: token-utils.slot(toast-background-color);
+	box-shadow: color-mix(in srgb, var(--ogs-m3-toast-shadow-color) 16%, transparent) 20px 10px 36px, 
+             color-mix(in srgb, var(--ogs-m3-toast-shadow-color) 6%, transparent) 0px 0px 0px 1px;
+													
+	&--error{
+		border-color: token-utils.slot(toast-border-color-error);
+	 background-color: token-utils.slot(toast-background-color-error);
+	}
+
+	&--success{
+		border-color: token-utils.slot(toast-border-color-success);
+	 background-color: token-utils.slot(toast-background-color-success);
+	}
+
+	&__title{
+		grid-area: toast__title;
+	}
+
+	&__close{
+		grid-area: toast__close;
+		font-size: small;
+		width: 24px;
+		height: 24px;
+	}
+
+	&__content{
+		grid-area: toast__content;
+	}
+}

@@ -1,5 +1,12 @@
 {
+	"files": [
+		"src/public-api.ts"
+	],
+	"include": [
+		"src/**/*.d.ts"
+	],
 	"compilerOptions": {
+    "outDir": "./dist",
 		"alwaysStrict": true,
 		"strict": true,
 		"strictNullChecks": true,
@@ -31,8 +38,7 @@
 		"target": "ES2022",
 		"skipLibCheck": true,
     "sourceMap": true,
-		"declarationMap": true,
-		"inlineSources": true
+		"declarationMap": true
 	},
 	"angularCompilerOptions": {
 		"enableI18nLegacyMessageIdFormat": false,

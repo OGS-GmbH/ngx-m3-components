@@ -19,4 +19,6 @@ export * from "./modules/icon-button.module";
 export * from "./providers/icon.provider";
 export * from "./tokens/icon.token";
 export * from "./types/icon.type";
-
+export * from "./services/toast/toast.service";
+export * from "./types/toast/toast-config.types";
+export * from "./types/toast/toast.types";

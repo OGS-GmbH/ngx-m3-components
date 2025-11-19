@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/OGS-GmbH/ngx-m3-components/compare/v1.2.0...v1.2.1) (2025-11-06)
+
+
+### Bug Fixes
+
+* **icon-button:** remove mat-button requirement ([eacbe87](https://github.com/OGS-GmbH/ngx-m3-components/commit/eacbe8726ec3f023c9d0ff63e25362695220c87b))
+
 ## [1.2.0](https://github.com/OGS-GmbH/ngx-m3-components/compare/v1.1.0...v1.2.0) (2025-07-17)
 
 
