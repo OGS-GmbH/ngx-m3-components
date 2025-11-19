@@ -1,0 +1,16 @@
+@for (_ of this.length; let index = $index; track index) {
+	<div class="input__container">
+		<mat-form-field>
+			<input #refsInput
+						 [autofocus]="(this.value | async)?.length !== undefined && (this.value | async)!.length === index && this.autoFocus"
+						 type="text"
+						 matInput
+						 [value]="(this.value | async)?.charAt(index)"
+						 [maxLength]="1"
+						 [disabled]="(this.isDisabled | async) || (this.value | async)?.length !== undefined && index > (this.value | async)!.length"
+						 (focus)="this.handleFocus(index)"
+						 (keydown)="this.handleKeyDown($event, index)"
+						 [placeholder]="this.placeholder ?? ''" />
+		</mat-form-field>
+	</div>
+}
