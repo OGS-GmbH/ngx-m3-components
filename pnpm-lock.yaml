@@ -108,12 +108,6 @@ importers:
       npm-package-json-lint:
         specifier: ^8.0.0
         version: 8.0.0(typescript@5.5.4)
-      stylelint:
-        specifier: ^16.25.0
-        version: 16.25.0(typescript@5.5.4)
-      stylelint-scss:
-        specifier: ^6.12.1
-        version: 6.12.1(stylelint@16.25.0(typescript@5.5.4))
       tslib:
         specifier: ^2.8.1
         version: 2.8.1
@@ -6872,11 +6866,13 @@ snapshots:
       '@keyv/bigmap': 1.3.0(keyv@5.5.4)
       hookified: 1.13.0
       keyv: 5.5.4
+    optional: true
 
   '@cacheable/utils@2.3.1':
     dependencies:
       hashery: 1.2.0
       keyv: 5.5.4
+    optional: true
 
   '@commitlint/cli@19.8.1(@types/node@24.10.1)(typescript@5.5.4)':
     dependencies:
@@ -6991,21 +6987,26 @@ snapshots:
   '@csstools/css-parser-algorithms@3.0.5(@csstools/css-tokenizer@3.0.4)':
     dependencies:
       '@csstools/css-tokenizer': 3.0.4
+    optional: true
 
-  '@csstools/css-tokenizer@3.0.4': {}
+  '@csstools/css-tokenizer@3.0.4':
+    optional: true
 
   '@csstools/media-query-list-parser@4.0.3(@csstools/css-parser-algorithms@3.0.5(@csstools/css-tokenizer@3.0.4))(@csstools/css-tokenizer@3.0.4)':
     dependencies:
       '@csstools/css-parser-algorithms': 3.0.5(@csstools/css-tokenizer@3.0.4)
       '@csstools/css-tokenizer': 3.0.4
+    optional: true
 
   '@csstools/selector-specificity@5.0.0(postcss-selector-parser@7.1.0)':
     dependencies:
       postcss-selector-parser: 7.1.0
+    optional: true
 
   '@discoveryjs/json-ext@0.6.1': {}
 
-  '@dual-bundle/import-meta-resolve@4.2.1': {}
+  '@dual-bundle/import-meta-resolve@4.2.1':
+    optional: true
 
   '@esbuild/aix-ppc64@0.21.5':
     optional: true
@@ -7507,8 +7508,10 @@ snapshots:
       hashery: 1.2.0
       hookified: 1.13.0
       keyv: 5.5.4
+    optional: true
 
-  '@keyv/serialize@1.1.1': {}
+  '@keyv/serialize@1.1.1':
+    optional: true
 
   '@leichtgewicht/ip-codec@2.0.5': {}
 
@@ -8453,7 +8456,8 @@ snapshots:
 
   arrify@1.0.1: {}
 
-  astral-regex@2.0.0: {}
+  astral-regex@2.0.0:
+    optional: true
 
   autoprefixer@10.4.20(postcss@8.4.41):
     dependencies:
@@ -8500,7 +8504,8 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
-  balanced-match@2.0.0: {}
+  balanced-match@2.0.0:
+    optional: true
 
   base64-js@1.5.1: {}
 
@@ -8600,6 +8605,7 @@ snapshots:
       hookified: 1.13.0
       keyv: 5.5.4
       qified: 0.5.2
+    optional: true
 
   call-bind-apply-helpers@1.0.2:
     dependencies:
@@ -8701,7 +8707,8 @@ snapshots:
 
   color-name@1.1.4: {}
 
-  colord@2.9.3: {}
+  colord@2.9.3:
+    optional: true
 
   colorette@2.0.20: {}
 
@@ -8830,7 +8837,8 @@ snapshots:
       shebang-command: 2.0.0
       which: 2.0.2
 
-  css-functions-list@3.2.3: {}
+  css-functions-list@3.2.3:
+    optional: true
 
   css-loader@7.1.2(webpack@5.94.0):
     dependencies:
@@ -8857,6 +8865,7 @@ snapshots:
     dependencies:
       mdn-data: 2.12.2
       source-map-js: 1.2.1
+    optional: true
 
   css-what@6.2.2: {}
 
@@ -9296,7 +9305,8 @@ snapshots:
 
   fast-uri@3.1.0: {}
 
-  fastest-levenshtein@1.0.16: {}
+  fastest-levenshtein@1.0.16:
+    optional: true
 
   fastq@1.19.1:
     dependencies:
@@ -9313,6 +9323,7 @@ snapshots:
   file-entry-cache@10.1.4:
     dependencies:
       flat-cache: 6.1.19
+    optional: true
 
   file-entry-cache@8.0.0:
     dependencies:
@@ -9376,6 +9387,7 @@ snapshots:
       cacheable: 2.2.0
       flatted: 3.3.3
       hookified: 1.13.0
+    optional: true
 
   flat@5.0.2: {}
 
@@ -9475,12 +9487,14 @@ snapshots:
   global-modules@2.0.0:
     dependencies:
       global-prefix: 3.0.0
+    optional: true
 
   global-prefix@3.0.0:
     dependencies:
       ini: 1.3.8
       kind-of: 6.0.3
       which: 1.3.1
+    optional: true
 
   globals@14.0.0: {}
 
@@ -9504,7 +9518,8 @@ snapshots:
       slash: 5.1.0
       unicorn-magic: 0.3.0
 
-  globjoin@0.1.4: {}
+  globjoin@0.1.4:
+    optional: true
 
   gopd@1.2.0: {}
 
@@ -9523,12 +9538,14 @@ snapshots:
   hashery@1.2.0:
     dependencies:
       hookified: 1.13.0
+    optional: true
 
   hasown@2.0.2:
     dependencies:
       function-bind: 1.1.2
 
-  hookified@1.13.0: {}
+  hookified@1.13.0:
+    optional: true
 
   hosted-git-info@2.8.9: {}
 
@@ -9547,7 +9564,8 @@ snapshots:
       readable-stream: 2.3.8
       wbuf: 1.7.3
 
-  html-tags@3.3.1: {}
+  html-tags@3.3.1:
+    optional: true
 
   htmlparser2@8.0.2:
     dependencies:
@@ -9681,7 +9699,8 @@ snapshots:
 
   inherits@2.0.4: {}
 
-  ini@1.3.8: {}
+  ini@1.3.8:
+    optional: true
 
   ini@4.1.1: {}
 
@@ -9844,12 +9863,15 @@ snapshots:
   keyv@5.5.4:
     dependencies:
       '@keyv/serialize': 1.1.1
+    optional: true
 
   kind-of@6.0.3: {}
 
-  known-css-properties@0.36.0: {}
+  known-css-properties@0.36.0:
+    optional: true
 
-  known-css-properties@0.37.0: {}
+  known-css-properties@0.37.0:
+    optional: true
 
   launch-editor@2.12.0:
     dependencies:
@@ -9991,7 +10013,8 @@ snapshots:
 
   lodash.startcase@4.4.0: {}
 
-  lodash.truncate@4.4.2: {}
+  lodash.truncate@4.4.2:
+    optional: true
 
   lodash.uniq@4.5.0: {}
 
@@ -10061,7 +10084,8 @@ snapshots:
 
   math-intrinsics@1.1.0: {}
 
-  mathml-tag-names@2.1.3: {}
+  mathml-tag-names@2.1.3:
+    optional: true
 
   mdast-util-find-and-replace@3.0.2:
     dependencies:
@@ -10176,9 +10200,11 @@ snapshots:
     dependencies:
       '@types/mdast': 4.0.4
 
-  mdn-data@2.12.2: {}
+  mdn-data@2.12.2:
+    optional: true
 
-  mdn-data@2.25.0: {}
+  mdn-data@2.25.0:
+    optional: true
 
   media-typer@0.3.0: {}
 
@@ -10193,7 +10219,8 @@ snapshots:
 
   meow@12.1.1: {}
 
-  meow@13.2.0: {}
+  meow@13.2.0:
+    optional: true
 
   meow@9.0.0:
     dependencies:
@@ -10951,11 +10978,13 @@ snapshots:
       icss-utils: 5.1.0(postcss@8.4.41)
       postcss: 8.4.41
 
-  postcss-resolve-nested-selector@0.1.6: {}
+  postcss-resolve-nested-selector@0.1.6:
+    optional: true
 
   postcss-safe-parser@7.0.1(postcss@8.5.6):
     dependencies:
       postcss: 8.5.6
+    optional: true
 
   postcss-selector-parser@7.1.0:
     dependencies:
@@ -11002,6 +11031,7 @@ snapshots:
   qified@0.5.2:
     dependencies:
       hookified: 1.13.0
+    optional: true
 
   qs@6.13.0:
     dependencies:
@@ -11384,6 +11414,7 @@ snapshots:
       ansi-styles: 4.3.0
       astral-regex: 2.0.0
       is-fullwidth-code-point: 3.0.0
+    optional: true
 
   slice-ansi@5.0.0:
     dependencies:
@@ -11533,6 +11564,7 @@ snapshots:
       postcss-selector-parser: 7.1.0
       postcss-value-parser: 4.2.0
       stylelint: 16.25.0(typescript@5.5.4)
+    optional: true
 
   stylelint@16.25.0(typescript@5.5.4):
     dependencies:
@@ -11577,6 +11609,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
       - typescript
+    optional: true
 
   supports-color@7.2.0:
     dependencies:
@@ -11590,10 +11623,12 @@ snapshots:
     dependencies:
       has-flag: 4.0.0
       supports-color: 7.2.0
+    optional: true
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svg-tags@1.0.0: {}
+  svg-tags@1.0.0:
+    optional: true
 
   symbol-observable@4.0.0: {}
 
@@ -11604,6 +11639,7 @@ snapshots:
       slice-ansi: 4.0.0
       string-width: 4.2.3
       strip-ansi: 6.0.1
+    optional: true
 
   tapable@2.3.0: {}
 
@@ -11917,6 +11953,7 @@ snapshots:
   which@1.3.1:
     dependencies:
       isexe: 2.0.0
+    optional: true
 
   which@2.0.2:
     dependencies:
@@ -11958,6 +11995,7 @@ snapshots:
     dependencies:
       imurmurhash: 0.1.4
       signal-exit: 4.1.0
+    optional: true
 
   ws@8.18.3: {}
 

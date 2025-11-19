@@ -17,3 +17,6 @@ export * from "./directives/toggle/element-ref-toggle-trigger.directive";
 export * from "./directives/toggle/mat-radio-group-ref-toggle-trigger.directive";
 export * from "./directives/toggle/native-ref-toggle-trigger.directive";
 export * from "./directives/input/number-input.directive";
+export * from "./services/toast/toast.service";
+export * from "./types/toast/toast-config.types";
+export * from "./types/toast/toast.types";
