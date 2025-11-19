@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.0](https://github.com/OGS-GmbH/ngx-m3-components/compare/v1.2.1...v1.3.0) (2025-11-19)
+
+
+### Features
+
+* **otp:** add ([d527641](https://github.com/OGS-GmbH/ngx-m3-components/commit/d527641f1bd17923998f86c9571cf5ebce17d7a5))
+* **toast:** add ([d8bbc21](https://github.com/OGS-GmbH/ngx-m3-components/commit/d8bbc21f242b22e29262635155d779abf6deae2c))
+
 ## [1.2.1](https://github.com/OGS-GmbH/ngx-m3-components/compare/v1.2.0...v1.2.1) (2025-11-06)
 
 
