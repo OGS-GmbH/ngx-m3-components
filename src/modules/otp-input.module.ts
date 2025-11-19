@@ -5,10 +5,7 @@ import { OtpInputComponent } from "../components/otp-input/otp-input.component";
 
 @NgModule({
   imports: [
-    // @angular modules
     CommonModule,
-
-    // @angular/material modules
     MatInputModule
   ],
   declarations: [
