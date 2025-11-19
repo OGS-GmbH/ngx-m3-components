@@ -4,7 +4,7 @@ import { ToggleChildComponent } from "./toggle-child.component";
 
 @Component({
   selector: "ogs-m3-toggle",
-  templateUrl: "toggle.component.html",
+  templateUrl: "./toggle.component.html",
   styleUrl: "toggle.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -28,7 +28,7 @@ export class ToggleComponent implements AfterViewInit, OnDestroy {
   public defaultIndex?: number;
 
   @Output()
-  public toggleDelegate: EventEmitter<ToggleDelegate> = new EventEmitter<ToggleDelegate>();
+  public readonly toggleDelegate: EventEmitter<ToggleDelegate> = new EventEmitter<ToggleDelegate>();
 
   @ContentChildren(ToggleChildComponent)
   protected children: QueryList<ToggleChildComponent> | undefined;

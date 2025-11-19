@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject, Input, OnDestro
 
 @Component({
   selector: "ogs-m3-toggle-child",
-  templateUrl: "toggle-child.component.html",
+  templateUrl: "./toggle-child.component.html",
   styleUrl: "toggle-child.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush
 })
