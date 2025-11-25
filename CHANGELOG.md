@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/OGS-GmbH/ngx-m3-components/compare/v1.3.0...v1.3.1) (2025-11-25)
+
+
+### Bug Fixes
+
+* **toast:** change origin of ngx-m3-theme import ([32ff3e3](https://github.com/OGS-GmbH/ngx-m3-components/commit/32ff3e376f3b8fd97bc3b9fd72ebcdc22d42378f))
+
 ## [1.3.0](https://github.com/OGS-GmbH/ngx-m3-components/compare/v1.2.1...v1.3.0) (2025-11-19)
 
 
