@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject, input, InputSignal } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
+import { MatButtonModule } from "@angular/material/button";
 import { ToastService } from '../../../services/toast/toast.service';
 import { STATUS_TYPES, StatusType } from '../../../types/toast/toast.types';
+
 @Component({
   selector: 'ogs-m3-toast',
   standalone: true,
@@ -10,7 +11,6 @@ import { STATUS_TYPES, StatusType } from '../../../types/toast/toast.types';
   styleUrl: './toast.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-
 export class ToastComponent {
   private _toastService: ToastService = inject(ToastService);
 
