@@ -10,7 +10,6 @@ import { UntypedToast } from '../../../types/toast/toast.types';
 
 @Component({
   selector: 'ogs-m3-toast-area',
-  standalone: true,
   imports: [ ToastComponent, NgComponentOutlet ],
   templateUrl: './toast-area.component.html',
   styleUrl: './toast-area.component.scss',

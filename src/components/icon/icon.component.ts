@@ -8,7 +8,8 @@ import { icon } from "@fortawesome/fontawesome-svg-core";
   selector: "ogs-m3-icon",
   template: "",
   styleUrl: "./icon.component.scss",
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class IconComponent {
   private readonly _hostElementRef: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);

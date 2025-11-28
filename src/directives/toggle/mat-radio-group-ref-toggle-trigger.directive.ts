@@ -4,7 +4,8 @@ import { MatRadioChange, MatRadioGroup } from "@angular/material/radio";
 import { Subscription } from "rxjs";
 
 @Directive({
-  selector: "ogs-m3-toggle[matRadioGroupTrigger]"
+  selector: "ogs-m3-toggle[matRadioGroupTrigger]",
+  standalone: false
 })
 export class MatRadioGroupRefToggleTriggerDirective implements AfterViewInit, OnDestroy {
   private _toggleRef: ToggleComponent = inject(ToggleComponent);

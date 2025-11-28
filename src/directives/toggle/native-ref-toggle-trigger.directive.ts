@@ -2,7 +2,8 @@ import { Directive, inject, Input, OnDestroy, Renderer2 } from "@angular/core";
 import { ToggleComponent } from "../../public-api";
 
 @Directive({
-  selector: "ogs-m3-toggle[nativeRefTrigger]"
+  selector: "ogs-m3-toggle[nativeRefTrigger]",
+  standalone: false
 })
 export class NativeRefToggleTriggerDirective implements OnDestroy {
   private _renderer2: Renderer2 = inject(Renderer2);

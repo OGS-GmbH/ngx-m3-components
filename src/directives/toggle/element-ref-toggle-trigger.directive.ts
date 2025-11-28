@@ -2,7 +2,8 @@ import { AfterViewInit, Directive, ElementRef, inject, Input, OnDestroy, Rendere
 import { ToggleComponent } from "../../public-api";
 
 @Directive({
-  selector: "ogs-m3-toggle[elementRefTrigger]"
+  selector: "ogs-m3-toggle[elementRefTrigger]",
+  standalone: false
 })
 export class ElementRefToggleTriggerDirective implements AfterViewInit, OnDestroy {
   private _renderer2: Renderer2 = inject(Renderer2);

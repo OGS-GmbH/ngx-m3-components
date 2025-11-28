@@ -6,7 +6,8 @@ import { ToggleChildComponent } from "./toggle-child.component";
   selector: "ogs-m3-toggle",
   templateUrl: "./toggle.component.html",
   styleUrl: "toggle.component.scss",
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class ToggleComponent implements AfterViewInit, OnDestroy {
   private _index: WritableSignal<number> = signal<number>(0);

@@ -5,7 +5,6 @@ import { STATUS_TYPES, StatusType } from '../../../types/toast/toast.types';
 
 @Component({
   selector: 'ogs-m3-toast',
-  standalone: true,
   imports: [ MatButtonModule ],
   templateUrl: './toast.component.html',
   styleUrl: './toast.component.scss',

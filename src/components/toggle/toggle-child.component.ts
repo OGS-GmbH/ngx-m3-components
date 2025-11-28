@@ -4,7 +4,8 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject, Input, OnDestro
   selector: "ogs-m3-toggle-child",
   templateUrl: "./toggle-child.component.html",
   styleUrl: "toggle-child.component.scss",
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class ToggleChildComponent implements OnDestroy {
   @Input({ required: false })

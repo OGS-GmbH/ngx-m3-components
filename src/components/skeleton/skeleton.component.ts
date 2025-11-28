@@ -5,7 +5,8 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
   selector: "ogs-m3-skeleton",
   templateUrl: "./skeleton.component.html",
   styleUrl: "./skeleton.component.scss",
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class SkeletonComponent {}
 /* eslint-enable @tseslint/no-extraneous-class */

@@ -1,7 +1,8 @@
 import { AfterViewInit, Directive, ElementRef, Host, Renderer2, inject } from "@angular/core";
 
 @Directive({
-  selector: "mat-radio-button[ogs-m3-radio-badge]"
+  selector: "mat-radio-button[ogs-m3-radio-badge]",
+  standalone: false
 })
 export class RadioBadgeDirective implements AfterViewInit {
   @Host()

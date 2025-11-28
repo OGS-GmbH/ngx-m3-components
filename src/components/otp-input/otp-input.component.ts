@@ -34,7 +34,8 @@ import { isValueIgnored, shouldIgnoreKey } from "../../helpers/otp-input.helper"
       useExisting: forwardRef(() => OtpInputComponent),
       multi: true
     }
-  ]
+  ],
+  standalone: false
 })
 export class OtpInputComponent implements ControlValueAccessor, Validator, AfterViewInit {
   private _onChangeCallback: ((value: string) => unknown) | null = null;
