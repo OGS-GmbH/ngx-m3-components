@@ -3,7 +3,7 @@ import { groupIconMdPlugin, groupIconVitePlugin } from "vitepress-plugin-group-i
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Components",
+  title: "ngx-m3-components",
   description: "A collection of reusable, customizable UI components built with Angular and Material 3. Each component is designed to extend or complement Angular Material with consistent theming, accessibility, and responsiveness in mind. Ideal for modern Angular applications following the Material Design 3 guidelines.",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config

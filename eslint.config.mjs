@@ -39,7 +39,8 @@ export default defineConfig(
       "node_modules",
       "dist",
       "README.md",
-      "CHANGELOG.md"
+      "CHANGELOG.md",
+      ".vitepress/.vitepress/cache"
     ]
   },
   {
