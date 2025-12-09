@@ -3,9 +3,8 @@
 		"src/public-api.ts"
 	],
 	"include": [
-		"src/**/*.d.ts",
-        ".vitepress/.vitepress/**/*.ts"
-	],
+		"src/**/*.ts"
+    ],
 	"compilerOptions": {
     "outDir": "./dist",
 		"alwaysStrict": true,

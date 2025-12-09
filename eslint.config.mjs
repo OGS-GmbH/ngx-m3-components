@@ -1,9 +1,9 @@
 import {
-  ANGULAR_TEMPLATE_RULES_PRESET,
   ESLINT_JSON_RULES,
   ESLINT_MARKDOWN_RULES,
-  getAngularTsPreset,
-  JS_RULES_PRESET
+  JS_RULES_PRESET,
+  ANGULAR_TEMPLATE_RULES_PRESET,
+  getAngularTsPreset
 } from "@ogs-gmbh/linter";
 import eslintJson from "@eslint/json";
 import eslintMarkdown from "@eslint/markdown";
@@ -13,8 +13,8 @@ import stylisticPlus from "@stylistic/eslint-plugin-plus";
 import stylisticTs from "@stylistic/eslint-plugin-ts";
 import tseslint from "typescript-eslint";
 import unicorn from "eslint-plugin-unicorn";
-import { defineConfig } from "eslint/config";
 import angular from "angular-eslint";
+import { defineConfig } from "eslint/config";
 
 export default defineConfig(
   {
@@ -38,10 +38,18 @@ export default defineConfig(
       ".idea",
       "node_modules",
       "dist",
-      "README.md",
       "CHANGELOG.md",
+      "README.md",
       ".vitepress/.vitepress/cache"
     ]
+  },
+  {
+    files: [ "**/*.html" ],
+    rules: ANGULAR_TEMPLATE_RULES_PRESET,
+    languageOptions: {
+      globals: { ...globals.browser },
+      parser: angular.templateParser
+    }
   },
   {
     files: [ "**/*.ts" ],
@@ -50,8 +58,13 @@ export default defineConfig(
       parser: tseslint.parser,
       globals: { ...globals.browser },
       parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname
+        tsconfigRootDir: import.meta.dirname,
+        projectService: {
+          allowDefaultProject: [
+            ".vitepress/.vitepress/*",
+            ".vitepress/.vitepress/theme/*"
+          ]
+        }
       }
     },
     rules: getAngularTsPreset({
@@ -59,18 +72,15 @@ export default defineConfig(
     })
   },
   {
-    files: [ "**/*.html" ],
-    languageOptions: {
-      parser: angular.templateParser
-    },
-    rules: ANGULAR_TEMPLATE_RULES_PRESET
-  },
-  {
     files: [ "**/*.js", "**/*.mjs", "**/*.cjs" ],
     rules: JS_RULES_PRESET
   },
   {
     files: [ "**/*.md" ],
+    language: "@markdown/commonmark",
+    languageOptions: {
+      frontmatter: "yaml"
+    },
     rules: ESLINT_MARKDOWN_RULES
   },
   {
@@ -89,4 +99,3 @@ export default defineConfig(
     rules: ESLINT_JSON_RULES
   }
 );
-
