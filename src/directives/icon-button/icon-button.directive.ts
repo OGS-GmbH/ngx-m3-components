@@ -4,7 +4,7 @@ import { Directive } from "@angular/core";
  * Directive that applies standardized styling for icon buttons.
  * Ensures consistent alignment of the icon and text inside the host button.
  * @remarks
- * This directive contains no runtime logic; it only provides layout-related CSS.
+ * This directive provides layout-related CSS, contains no runtime logic.
  * @category Directives
  *
  * @since 1.0.0

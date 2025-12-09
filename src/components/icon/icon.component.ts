@@ -11,11 +11,17 @@ import { icon } from "@fortawesome/fontawesome-svg-core";
  *
  * @example
  * ```html
+ * <!-- Using a static icon name -->
+ * <!-- "icon" receives a string literal -->
+ * <!-- "prefix" selects the FontAwesome style/weight (solid, regular, light, duotone, brands, etc. Regular, in this example) -->
  * <ogs-m3-icon
  *   icon="myIconName"
  *   prefix="far" />
  *
- *   <ogs-m3-icon
+ * <!-- Using Angular property binding -->
+ * <!-- The icon name is taken dynamically from your component (data.iconName) -->
+ * <!-- Used default prefix ("fas") -->
+ * <ogs-m3-icon
  *   [icon]="data.iconName" />
  * ```
  * @remarks

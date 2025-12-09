@@ -5,9 +5,8 @@ To use the ogs-m3-icon component in your project, simply place it inside your te
 
 ## 2. Provide
 Import the module/component in your Angular application:
-
 ```typescript [example.ts]
-import { IconComponent, IconModule } from '@ogs-gmbh/ngx-m3-components';
+import { IconModule, IconComponent } from '@ogs-gmbh/ngx-m3-components';
 ```
 
 ## 3. Usage

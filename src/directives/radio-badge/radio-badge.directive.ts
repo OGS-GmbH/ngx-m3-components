@@ -1,5 +1,13 @@
 import { AfterViewInit, Directive, ElementRef, Host, Renderer2, inject } from "@angular/core";
 
+/**
+ * Marks an element as part of a radio-style badge group.
+ * Typically used to visually indicate selection state and allow only one item in the group to be active at a time.
+ * @category Directives
+ *
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 @Directive({
   selector: "mat-radio-button[ogs-m3-radio-badge]"
 })

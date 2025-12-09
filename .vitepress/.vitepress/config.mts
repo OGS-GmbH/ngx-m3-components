@@ -25,7 +25,10 @@ export default defineConfig({
       {
         text: "Guide",
         items: [
-          { text: "Getting started", link: "/guide/" }
+          { text: "Getting started", link: "/guide/" },
+          { text: "Icon component", link: "/guide/icon/" },
+          { text: "OTP input component", link: "/guide/otp-input/" },
+          { text: "Skeleton component", link: "/guide/skeleton/" }
         ]
       },
       {
