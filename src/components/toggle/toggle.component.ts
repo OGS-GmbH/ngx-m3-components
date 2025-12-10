@@ -2,6 +2,13 @@ import { ChangeDetectionStrategy, Component, ContentChildren, Input, QueryList, 
 import { ToggleDelegate } from "./toggle.type";
 import { ToggleChildComponent } from "./toggle-child.component";
 
+/**
+ * A simple switch component that allows the user to toggle between two states (on/off, true/false).
+ *
+ * @category Components
+ * @since 1.1.0
+ * @author Simon Kovtyk
+ */
 @Component({
   selector: "ogs-m3-toggle",
   templateUrl: "./toggle.component.html",
@@ -11,22 +18,28 @@ import { ToggleChildComponent } from "./toggle-child.component";
 export class ToggleComponent implements AfterViewInit, OnDestroy {
   private _index: WritableSignal<number> = signal<number>(0);
 
+  /** Read-only signal representing the index of this toggle */
   public index: Signal<number> = this._index.asReadonly();
 
   /* eslint-disable-next-line @unicorn/no-useless-undefined */
   private _name: WritableSignal<string | undefined> = signal<string | undefined>(undefined);
 
+  /** Read-only signal representing the name of this toggle */
   public name: Signal<string | undefined> = this._name.asReadonly();
 
+  /** Reverses the toggle orientation when true */
   @Input({ required: false, transform: booleanAttribute })
   public reverse: boolean = false;
 
+  /** Default name to use when no name is provided */
   @Input({ required: false })
   public defaultName?: string;
 
+  /** Default index to use when no index is provided */
   @Input({ required: false })
   public defaultIndex?: number;
 
+  /** Emitted when the toggle state changes, providing the toggle delegate. */
   @Output()
   public readonly toggleDelegate: EventEmitter<ToggleDelegate> = new EventEmitter<ToggleDelegate>();
 
@@ -60,6 +73,7 @@ export class ToggleComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  /** Activates the toggle child at the given name */
   public showName (visibleName: string): void {
     this.children?.forEach((toggleChild: ToggleChildComponent, index: number): void => {
       if (toggleChild.name !== visibleName)
@@ -79,6 +93,7 @@ export class ToggleComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  /** Activates the toggle child at the given index */
   public showIndex (visibleIndex: number): void {
     this.children?.forEach((toggleChild: ToggleChildComponent, index: number): void => {
       if (index !== visibleIndex)
@@ -98,6 +113,7 @@ export class ToggleComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  /** Moves the toggle to display the next item */
   public showNext (): void {
     if (this.children === undefined)
       return;
@@ -110,6 +126,7 @@ export class ToggleComponent implements AfterViewInit, OnDestroy {
     this.showIndex(nextIndex);
   }
 
+  /** Moves the toggle to display the previous item */
   public showPrevious (): void {
     if (this.children === undefined)
       return;
@@ -122,6 +139,7 @@ export class ToggleComponent implements AfterViewInit, OnDestroy {
     this.showIndex(nextIndex);
   }
 
+  /** Toggle's action */
   public toggle (): void {
     this.reverse
       ? this.showPrevious()

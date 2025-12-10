@@ -32,9 +32,13 @@
 	},
 	"scripts": {
 		"ci:build:main:production": "ng build",
+        "ci:docs:extract:typedoc": "typedoc && bash ./prepare-typedoc.sh",
+        "ci:docs:main:vitepress": "vitepress build .vitepress",
 		"ci:pr:commitlint:main:commitlint": "commitlint",
 		"ci:pr:lint:main:eslint": "eslint .",
-		"prepare": "husky"
+        "prepare": "husky",
+        "vitepress": "vitepress dev .vitepress",
+        "vitepress-preview": "vitepress preview .vitepress"
 	},
 	"devDependencies": {
 		"@angular-devkit/build-angular": "^18.2.21",
@@ -59,8 +63,12 @@
 		"npm-package-json-lint": "^8.0.0",
 		"tslib": "^2.8.1",
 		"typescript": "~5.5.4",
-		"typescript-eslint": "^8.47.0"
-	},
+		"typescript-eslint": "^8.47.0",
+        "typedoc": "^0.28.15",
+        "typedoc-plugin-markdown": "^4.9.0",
+        "vitepress": "^1.6.4",
+        "vitepress-plugin-group-icons": "^1.6.5"
+      },
 	"peerDependencies": {
 		"@angular/animations": "^18.2.1",
 		"@angular/cdk": "^18.2.1",
