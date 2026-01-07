@@ -1,7 +1,23 @@
 @mixin base($theme) {
-  
+	/* Material-Component interop */
+
+	/* Form-Field */
+	.mat-mdc-form-field-icon-prefix>ogs-m3-icon,
+	.mat-mdc-form-field-icon-suffix>ogs-m3-icon {
+		padding: 0 12px;
+		box-sizing: content-box;
+	}
+
+	/* Button */
+	ogs-m3-icon[matButtonIcon]:not([iconPositionEnd]) {
+		margin-right: 12px;
+	}
+
+	ogs-m3-icon[matButtonIcon][iconPositionEnd] {
+		margin-left: 12px;
+	}
 }
 
 @mixin theme($theme) {
-
+	@include base($theme);
 }
