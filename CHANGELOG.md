@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/OGS-GmbH/ngx-m3-components/compare/v1.3.1...v1.4.0) (2026-01-14)
+
+
+### Features
+
+* **icon-theme:** add interop for icon spacing in material components ([#13](https://github.com/OGS-GmbH/ngx-m3-components/issues/13)) ([940d2ae](https://github.com/OGS-GmbH/ngx-m3-components/commit/940d2ae4b7167a36b47b2e8c60628a716415c9ec))
+
 ## [1.3.1](https://github.com/OGS-GmbH/ngx-m3-components/compare/v1.3.0...v1.3.1) (2025-11-25)
 
 
