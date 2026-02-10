@@ -5,9 +5,7 @@ import { SkeletonComponent } from "../components/skeleton/skeleton.component";
 /* eslint-disable @tseslint/no-extraneous-class */
 @NgModule({
   imports: [
-    CommonModule
-  ],
-  declarations: [
+    CommonModule,
     SkeletonComponent
   ],
   exports: [

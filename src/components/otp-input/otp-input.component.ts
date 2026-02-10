@@ -3,19 +3,25 @@ import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
+  effect,
   ElementRef,
-  EventEmitter,
   forwardRef,
-  Input,
-  Output,
-  QueryList,
-  ViewChildren,
-  ViewEncapsulation
+  input,
+  InputSignal,
+  InputSignalWithTransform,
+  output,
+  OutputEmitterRef,
+  signal,
+  Signal,
+  viewChildren,
+  ViewEncapsulation,
+  WritableSignal
 } from "@angular/core";
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from "@angular/forms";
 import { KeyboardKeys } from "@ogs-gmbh/ngx-utils";
-import { BehaviorSubject, Subject } from "rxjs";
 import { isValueIgnored, shouldIgnoreKey } from "../../helpers/otp-input.helper";
+import { createFixedArray } from "../../helpers/array.helper";
+import { MatFormField } from "@angular/material/input";
 
 @Component({
   selector: "ogs-m3-otp-input",
@@ -23,6 +29,9 @@ import { isValueIgnored, shouldIgnoreKey } from "../../helpers/otp-input.helper"
   styleUrl: "./otp-input.component.scss",
   encapsulation: ViewEncapsulation.ShadowDom,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    MatFormField
+  ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -45,59 +54,49 @@ export class OtpInputComponent implements ControlValueAccessor, Validator, After
 
   private _currentInputIndex: number = 0;
 
-  protected value: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+  protected readonly createFixedArray: typeof createFixedArray = createFixedArray;
 
-  protected isDisabled: Subject<boolean> = new Subject<boolean>();
+  protected readonly innerValue: WritableSignal<string | null> = signal<string | null>(null);
 
-  protected length: number[] | null = null;
+  protected readonly innerIsDisabled: WritableSignal<boolean> = signal(false);
 
-  @Input({ transform: booleanAttribute })
-  public set disabled (value: boolean) {
-    this.isDisabled.next(value);
+  public readonly isDisabled: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
+
+  public readonly value: InputSignal<string | null> = input<string | null>(null);
+
+  public readonly length: InputSignal<number> = input.required<number>();
+
+  protected readonly refsInput: Signal<readonly ElementRef[]> = viewChildren<ElementRef>("refsInput");
+
+  public readonly accepts: Signal<string[] | undefined> = input<string[] | undefined>()
+
+  public readonly autoFocus: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
+
+  public readonly placeholder: InputSignal<string | undefined> = input();
+
+  public readonly selectChange: OutputEmitterRef<void> = output();
+  
+  constructor() {
+    effect((): void => {
+      this.innerValue.set(this.value());
+    });
+
+    effect((): void => {
+      this.innerIsDisabled.set(this.isDisabled());
+    });
   }
-
-  @Input({ alias: "value" })
-  public set _value (value: string | null) {
-    this.value.next(value);
-  }
-
-  @ViewChildren("refsInput")
-  protected refsInput!: QueryList<ElementRef<HTMLInputElement>>;
-
-  @Input({ alias: "length", required: true })
-  // eslint-disable-next-line @tseslint/no-shadow
-  public set _length (length: number) {
-    this.length = Array(length).fill(length - 1)
-      .map((_: number, index: number): number => index);
-  }
-
-  @Input()
-  public accepts: string[] | undefined;
-
-  @Input()
-  public autoFocus: boolean = false;
-
-  @Input()
-  public placeholder?: string | undefined;
-
-  @Output()
-  public readonly select: EventEmitter<void> = new EventEmitter<void>();
 
   private _setValueAtIndex (index: number, char: string): void {
-    if (!this.value.value) {
+    const innerValue: string | null = this.innerValue();
+
+    if (!innerValue) {
       this._onChangeCallback?.(char);
 
-      return void this.value.next(char);
+      return void this.innerValue.set(char);
     }
 
-    const currentValue: string = this.value.value;
-
-    // eslint-disable-next-line @tseslint/no-unnecessary-condition
-    if (currentValue === null)
-      return;
-
     // eslint-disable-next-line @tseslint/typedef, @unicorn/prefer-spread
-    const valueAsArray = currentValue.split("");
+    const valueAsArray = innerValue.split("");
 
     valueAsArray[ index ] = char;
 
@@ -105,11 +104,11 @@ export class OtpInputComponent implements ControlValueAccessor, Validator, After
 
     this._onChangeCallback?.(value);
 
-    return void this.value.next(value);
+    return void this.innerValue.set(value);
   }
 
   private _focusToIndex (index: number): void {
-    const inputElement: ElementRef<HTMLInputElement> | undefined = this.refsInput.find((_: ElementRef<HTMLInputElement>, _index: number): boolean => _index === index);
+    const inputElement: ElementRef<HTMLInputElement> | undefined = this.refsInput().find((_: ElementRef<HTMLInputElement>, _index: number): boolean => _index === index);
 
     if (inputElement === undefined) return;
 
@@ -126,7 +125,7 @@ export class OtpInputComponent implements ControlValueAccessor, Validator, After
 
   protected handleFocus (currentInputIndex: number): void {
     this._currentInputIndex = currentInputIndex;
-    this.select.emit();
+    this.selectChange.emit();
     this._onTouchedCallback?.();
   }
 
@@ -134,7 +133,8 @@ export class OtpInputComponent implements ControlValueAccessor, Validator, After
     const eventTarget: HTMLInputElement = keyboardEvent.target as HTMLInputElement;
 
     if (keyboardEvent.key !== KeyboardKeys.BACKSPACE) {
-      if (this.accepts !== undefined && shouldIgnoreKey(this.accepts, keyboardEvent.key)) return void keyboardEvent.preventDefault();
+      const accepts: string[] | undefined = this.accepts();
+      if (accepts !== undefined && shouldIgnoreKey(accepts, keyboardEvent.key)) return void keyboardEvent.preventDefault();
 
       if (eventTarget.value) eventTarget.value = keyboardEvent.key;
 
@@ -184,11 +184,11 @@ export class OtpInputComponent implements ControlValueAccessor, Validator, After
   }
 
   public setDisabledState (isDisabled: boolean): void {
-    this.isDisabled.next(isDisabled);
+    this.innerIsDisabled.set(isDisabled);
   }
 
   public writeValue (value: string): void {
-    this.value.next(value);
+    this.innerValue.set(value);
   }
 
   public registerOnValidatorChange (callback: () => void): void {
@@ -198,12 +198,13 @@ export class OtpInputComponent implements ControlValueAccessor, Validator, After
   public validate (control: AbstractControl): ValidationErrors | null {
     // eslint-disable-next-line @tseslint/no-unsafe-assignment
     const value: string = control.value;
+    const accepts: string[] | undefined = this.accepts();
 
-    return this.accepts !== undefined && isValueIgnored(this.accepts, value) ? { invalid: true } : null;
+    return accepts !== undefined && isValueIgnored(accepts, value) ? { invalid: true } : null;
   }
 
   public ngAfterViewInit (): void {
-    if (!this.autoFocus) return;
+    if (!this.autoFocus()) return;
 
     this.restoreFocus();
   }

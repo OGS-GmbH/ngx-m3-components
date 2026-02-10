@@ -28,7 +28,7 @@ export class ToastService {
    * Show a toast
    * @param toast - the toast to display
    *
-   * @return the assigned id of the toast
+   * @returns The assigned id of the toast
    */
   public show (toast: UntypedToast): string {
     const toastId: string = crypto.randomUUID();
@@ -41,7 +41,7 @@ export class ToastService {
 
   /**
    * Close a Toast
-   * @param toast - the id of the toast (is a automatically assigned uuid)
+   * @param toastId - the id of the toast (is a automatically assigned uuid)
    */
   public close (toastId: string): void {
     this._toastStoreService.removeToast(toastId);

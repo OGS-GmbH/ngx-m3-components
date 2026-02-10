@@ -1,4 +1,11 @@
-MIT License
+---
+prev: false
+next: false
+---
+
+# License
+
+## MIT License
 
 Copyright (c) 2025 — present OGS Gesellschaft für Datenverarbeitung und Systemberatung mbH
 

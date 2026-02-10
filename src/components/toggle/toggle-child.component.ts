@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, Input, OnDestroy, TemplateRef, ViewChild } from "@angular/core";
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, input, InputSignal, OnDestroy, Signal, TemplateRef, viewChild } from "@angular/core";
 
 @Component({
   selector: "ogs-m3-toggle-child",
@@ -7,11 +7,9 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject, Input, OnDestro
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToggleChildComponent implements OnDestroy {
-  @Input({ required: false })
-  public name?: string;
+  public readonly name: InputSignal<string | undefined> = input<string | undefined>();
 
-  @ViewChild(TemplateRef)
-  public templateRef!: TemplateRef<unknown>;
+  public readonly templateRef: Signal<TemplateRef<unknown>> = viewChild.required(TemplateRef);
 
   public destroyRef: DestroyRef = inject(DestroyRef);
 

@@ -7,7 +7,7 @@ type BypassKey = {
 };
 
 @Directive({
-  selector: "input[numberInput]",
+  selector: "input[ogsNumberInput]",
   standalone: true
 })
 export class NumberInputDirective {

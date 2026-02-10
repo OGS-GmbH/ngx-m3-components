@@ -1,24 +1,22 @@
-import { Directive, inject, Input, OnDestroy, Renderer2 } from "@angular/core";
+import { Directive, inject, input, InputSignal, OnDestroy, OnInit, Renderer2 } from "@angular/core";
 import { ToggleComponent } from "../../public-api";
 
 @Directive({
-  selector: "ogs-m3-toggle[nativeRefTrigger]"
+  selector: "ogs-m3-toggle[ogsNativeRefTrigger]"
 })
-export class NativeRefToggleTriggerDirective implements OnDestroy {
+export class NativeRefToggleTriggerDirective implements OnInit, OnDestroy {
   private _renderer2: Renderer2 = inject(Renderer2);
 
   private _toggleRef: ToggleComponent = inject(ToggleComponent);
 
   private _unlistener: (() => void) | null = null;
 
-  @Input({ required: true })
-  public trigger!: HTMLElement;
+  public readonly trigger: InputSignal<HTMLElement> = input.required<HTMLElement>();
 
-  @Input({ required: false })
-  public triggerEvent: string = "click";
+  public readonly triggerEvent: InputSignal<string> = input<string>("click");
 
-  constructor () {
-    this._unlistener = this._renderer2.listen(this.trigger, this.triggerEvent, () => this._toggleRef.toggle());
+  public ngOnInit (): void {
+    this._unlistener = this._renderer2.listen(this.trigger(), this.triggerEvent(), () => this._toggleRef.toggle());
   }
 
   public ngOnDestroy (): void {

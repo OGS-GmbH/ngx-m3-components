@@ -15,7 +15,6 @@ export * from "./modules/icon.module";
 export * from "./modules/skeleton.module";
 export * from "./modules/otp-input.module";
 export * from "./modules/toggle.module";
-export * from "./modules/icon-button.module";
 export * from "./providers/icon.provider";
 export * from "./tokens/icon.token";
 export * from "./types/icon.type";

@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, ContentChildren, Input, QueryList, booleanAttribute, Output, EventEmitter, AfterViewInit, WritableSignal, signal, Signal, ViewChild, ViewContainerRef, EmbeddedViewRef, OnDestroy } from "@angular/core";
-import { ToggleDelegate } from "./toggle.type";
+import { ChangeDetectionStrategy, Component, booleanAttribute, AfterViewInit, WritableSignal, signal, Signal, ViewContainerRef, EmbeddedViewRef, OnDestroy, InputSignalWithTransform, input, InputSignal, output, OutputEmitterRef, contentChildren, viewChild } from "@angular/core";
+import { ToggleChange } from "./toggle.type";
 import { ToggleChildComponent } from "./toggle-child.component";
 
 @Component({
@@ -9,70 +9,59 @@ import { ToggleChildComponent } from "./toggle-child.component";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToggleComponent implements AfterViewInit, OnDestroy {
-  private _index: WritableSignal<number> = signal<number>(0);
+  private readonly _index: WritableSignal<number> = signal<number>(0);
 
-  public index: Signal<number> = this._index.asReadonly();
+  public readonly index: Signal<number> = this._index.asReadonly();
 
   /* eslint-disable-next-line @unicorn/no-useless-undefined */
-  private _name: WritableSignal<string | undefined> = signal<string | undefined>(undefined);
+  private readonly _name: WritableSignal<string | undefined> = signal<string | undefined>(undefined);
 
-  public name: Signal<string | undefined> = this._name.asReadonly();
+  public readonly name: Signal<string | undefined> = this._name.asReadonly();
 
-  @Input({ required: false, transform: booleanAttribute })
-  public reverse: boolean = false;
+  public readonly reverse: InputSignalWithTransform<boolean, unknown> = input(false, { transform: booleanAttribute });
 
-  @Input({ required: false })
-  public defaultName?: string;
+  public readonly defaultName: InputSignal<string | undefined> = input<string | undefined>();
 
-  @Input({ required: false })
-  public defaultIndex?: number;
+  public readonly defaultIndex: InputSignal<number | undefined> = input<number | undefined>();
 
-  @Output()
-  public readonly toggleDelegate: EventEmitter<ToggleDelegate> = new EventEmitter<ToggleDelegate>();
+  public readonly toggleChange: OutputEmitterRef<ToggleChange> = output<ToggleChange>();
 
-  @ContentChildren(ToggleChildComponent)
-  protected children: QueryList<ToggleChildComponent> | undefined;
+  public readonly children: Signal<readonly ToggleChildComponent[]> = contentChildren(ToggleChildComponent);
 
-  @ViewChild("viewContainerRef", { read: ViewContainerRef })
-  protected viewContainerRef!: ViewContainerRef;
+  public readonly viewContainerRef: Signal<ViewContainerRef> = viewChild.required("viewContainerRef", { read: ViewContainerRef });
 
   private _embeddedViewRef: EmbeddedViewRef<unknown> | null = null;
 
   private _currentToggleChild: ToggleChildComponent | null = null;
 
   private _updateNameByIndex (index: number): void {
-    const child: ToggleChildComponent | undefined = this.children?.get(index);
-    const childName: string | undefined = child?.name;
+    const child: ToggleChildComponent | undefined = this.children()[index];
+    const childName: string | undefined = child?.name();
 
     this._name.set(childName);
   }
 
   private _handleToggleDelegate (visibleName: string | undefined, handler: () => void): void {
-    if (!this.toggleDelegate.observed) {
-      handler();
-
-      return;
-    }
-
-    this.toggleDelegate.emit({
+    this.toggleChange.emit({
       complete: handler,
       name: visibleName
     });
   }
 
   public showName (visibleName: string): void {
-    this.children?.forEach((toggleChild: ToggleChildComponent, index: number): void => {
-      if (toggleChild.name !== visibleName)
+    this.children().forEach((toggleChild: ToggleChildComponent, index: number): void => {
+      if (toggleChild.name() !== visibleName)
         return;
 
       this._handleToggleDelegate(
-        toggleChild.name,
+        toggleChild.name(),
         () => {
           this._embeddedViewRef?.destroy();
+          /* eslint-disable-next-line @angular/no-lifecycle-call */
           this._currentToggleChild?.ngOnDestroy();
           this._index.set(index);
           this._updateNameByIndex(index);
-          this._embeddedViewRef = this.viewContainerRef.createEmbeddedView(toggleChild.templateRef);
+          this._embeddedViewRef = this.viewContainerRef().createEmbeddedView(toggleChild.templateRef());
           this._currentToggleChild = toggleChild;
         }
       );
@@ -80,18 +69,19 @@ export class ToggleComponent implements AfterViewInit, OnDestroy {
   }
 
   public showIndex (visibleIndex: number): void {
-    this.children?.forEach((toggleChild: ToggleChildComponent, index: number): void => {
+    this.children().forEach((toggleChild: ToggleChildComponent, index: number): void => {
       if (index !== visibleIndex)
         return;
 
       this._handleToggleDelegate(
-        toggleChild.name,
+        toggleChild.name(),
         () => {
           this._embeddedViewRef?.destroy();
+          /* eslint-disable-next-line @angular/no-lifecycle-call */
           this._currentToggleChild?.ngOnDestroy();
           this._index.set(index);
           this._updateNameByIndex(index);
-          this._embeddedViewRef = this.viewContainerRef.createEmbeddedView(toggleChild.templateRef);
+          this._embeddedViewRef = this.viewContainerRef().createEmbeddedView(toggleChild.templateRef());
           this._currentToggleChild = toggleChild;
         }
       );
@@ -99,9 +89,6 @@ export class ToggleComponent implements AfterViewInit, OnDestroy {
   }
 
   public showNext (): void {
-    if (this.children === undefined)
-      return;
-
     const index: number = this._index();
     const nextIndex: number = index === this.children.length - 1
       ? 0
@@ -111,9 +98,6 @@ export class ToggleComponent implements AfterViewInit, OnDestroy {
   }
 
   public showPrevious (): void {
-    if (this.children === undefined)
-      return;
-
     const index: number = this._index();
     const nextIndex: number = index === 0
       ? this.children.length - 1
@@ -123,17 +107,18 @@ export class ToggleComponent implements AfterViewInit, OnDestroy {
   }
 
   public toggle (): void {
-    this.reverse
+    this.reverse()
       ? this.showPrevious()
       : this.showNext();
   }
 
   public ngAfterViewInit (): void {
-    if (this.defaultName !== undefined)
-      this.showName(this.defaultName);
-    /* eslint-disable-next-line no-negated-condition, @unicorn/no-negated-condition */
-    else if (this.defaultIndex !== undefined)
-      this.showIndex(this.defaultIndex);
+    const defaultName: string | undefined = this.defaultName();
+    const defaultIndex: number | undefined = this.defaultIndex();
+    if (defaultName)
+      this.showName(defaultName);
+    else if (defaultIndex)
+      this.showIndex(defaultIndex);
     else
       this.showIndex(this._index());
   }

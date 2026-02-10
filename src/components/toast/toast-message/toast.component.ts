@@ -14,9 +14,9 @@ import { STATUS_TYPES, StatusType } from '../../../types/toast/toast.types';
 export class ToastComponent {
   private _toastService: ToastService = inject(ToastService);
 
-  public id: InputSignal<string> = input.required();
+  public readonly id: InputSignal<string> = input.required();
 
-  public status: InputSignal<StatusType> = input(STATUS_TYPES.NEUTRAL as StatusType);
+  public readonly status: InputSignal<StatusType> = input(STATUS_TYPES.NEUTRAL as StatusType);
 
   protected statusTypes: typeof STATUS_TYPES = STATUS_TYPES;
 

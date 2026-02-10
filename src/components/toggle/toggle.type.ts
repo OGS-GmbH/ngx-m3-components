@@ -1,4 +1,4 @@
-export interface ToggleDelegate {
+export interface ToggleChange {
   name: string | undefined;
   complete(): void;
 }

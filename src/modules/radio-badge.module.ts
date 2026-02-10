@@ -5,9 +5,7 @@ import { RadioBadgeDirective } from "../public-api";
 /* eslint-disable @tseslint/no-extraneous-class */
 @NgModule({
   imports: [
-    CommonModule
-  ],
-  declarations: [
+    CommonModule,
     RadioBadgeDirective
   ],
   exports: [

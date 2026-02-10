@@ -2,7 +2,7 @@ import { Directive } from "@angular/core";
 
 /* eslint-disable @tseslint/no-extraneous-class */
 @Directive({
-  selector: "button[ogs-m3-icon-button],button[ogs-m3-icon-button]",
+  selector: "button[ogsM3IconButton],button[ogsM3IconButton]",
   host: {
     "[class.ogs-m3-icon-button]": "true"
   }

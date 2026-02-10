@@ -1,4 +1,5 @@
 import { inject, Injectable } from "@angular/core";
+/* eslint-disable-next-line @tseslint/no-shadow */
 import { animationFrameScheduler, BehaviorSubject, Observable, Subscription, throttleTime, timer } from "rxjs";
 import { ToastConfig } from "../../types/toast/toast-config.types";
 import { UntypedToast } from "../../types/toast/toast.types";
