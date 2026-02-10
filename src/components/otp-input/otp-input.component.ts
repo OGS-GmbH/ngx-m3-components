@@ -17,6 +17,13 @@ import { KeyboardKeys } from "@ogs-gmbh/ngx-utils";
 import { BehaviorSubject, Subject } from "rxjs";
 import { isValueIgnored, shouldIgnoreKey } from "../../helpers/otp-input.helper";
 
+/**
+ * A multi-field input component that captures user input one character at a time.
+ *
+ * @category Components
+ * @since 1.3.0
+ * @author Simon Kovtyk
+ */
 @Component({
   selector: "ogs-m3-otp-input",
   templateUrl: "./otp-input.component.html",
@@ -51,11 +58,13 @@ export class OtpInputComponent implements ControlValueAccessor, Validator, After
 
   protected length: number[] | null = null;
 
+  /** Disables the otp-input component */
   @Input({ transform: booleanAttribute })
   public set disabled (value: boolean) {
     this.isDisabled.next(value);
   }
 
+  /** Sets the current input value */
   @Input({ alias: "value" })
   public set _value (value: string | null) {
     this.value.next(value);
@@ -64,6 +73,7 @@ export class OtpInputComponent implements ControlValueAccessor, Validator, After
   @ViewChildren("refsInput")
   protected refsInput!: QueryList<ElementRef<HTMLInputElement>>;
 
+  /** Defines the number of input cells */
   @Input({ alias: "length", required: true })
   // eslint-disable-next-line @tseslint/no-shadow
   public set _length (length: number) {
@@ -71,15 +81,19 @@ export class OtpInputComponent implements ControlValueAccessor, Validator, After
       .map((_: number, index: number): number => index);
   }
 
+  /** Allowed characters for this input */
   @Input()
   public accepts: string[] | undefined;
 
+  /** Automatically focuses the cell */
   @Input()
   public autoFocus: boolean = false;
 
+  /** Placeholder text displayed in each empty cell */
   @Input()
   public placeholder?: string | undefined;
 
+  /** Emitted when the component is selected or focused */
   @Output()
   public readonly select: EventEmitter<void> = new EventEmitter<void>();
 
@@ -158,6 +172,7 @@ export class OtpInputComponent implements ControlValueAccessor, Validator, After
     this._focusToPrevious(index);
   }
 
+  /** Restores focus to a specific cell based on the given direction (`forward`, `backward`, or `current`) */
   public restoreFocus (direction?: "forward" | "backward" | "current"): void {
     if (direction === "forward") return void this._focusToNext(this._currentInputIndex);
 
@@ -166,6 +181,7 @@ export class OtpInputComponent implements ControlValueAccessor, Validator, After
     this._focusToIndex(this._currentInputIndex);
   }
 
+  /** Sets char to the cell */
   public setChar (char: string): void {
     // eslint-disable-next-line @tseslint/no-unnecessary-condition
     if (this._currentInputIndex === null) return;
@@ -191,10 +207,12 @@ export class OtpInputComponent implements ControlValueAccessor, Validator, After
     this.value.next(value);
   }
 
+  /** Registers a callback to notify when validation rules change */
   public registerOnValidatorChange (callback: () => void): void {
     this._onValidatorChange = callback;
   }
 
+  /** Validates the current value against the allowed characters */
   public validate (control: AbstractControl): ValidationErrors | null {
     // eslint-disable-next-line @tseslint/no-unsafe-assignment
     const value: string = control.value;
