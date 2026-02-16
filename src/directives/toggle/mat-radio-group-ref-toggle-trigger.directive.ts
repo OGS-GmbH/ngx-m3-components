@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, inject, Input, OnDestroy } from "@angular/core";
+import { AfterViewInit, Directive, inject, input, InputSignal, OnDestroy } from "@angular/core";
 import { ToggleComponent } from "../../public-api";
 import { MatRadioChange, MatRadioGroup } from "@angular/material/radio";
 import { Subscription } from "rxjs";
@@ -12,7 +12,7 @@ import { Subscription } from "rxjs";
  * @author Simon Kovtyk
  */
 @Directive({
-  selector: "ogs-m3-toggle[matRadioGroupTrigger]"
+  selector: "ogs-m3-toggle[ogsMatRadioGroupTrigger]"
 })
 export class MatRadioGroupRefToggleTriggerDirective implements AfterViewInit, OnDestroy {
   private _toggleRef: ToggleComponent = inject(ToggleComponent);
@@ -20,11 +20,10 @@ export class MatRadioGroupRefToggleTriggerDirective implements AfterViewInit, On
   private _changeSubscription: Subscription | null = null;
 
   /** The target "MatRadioGroup" controlled by this trigger. Required. */
-  @Input({ required: true })
-  public trigger!: MatRadioGroup;
+  public readonly trigger: InputSignal<MatRadioGroup> = input.required<MatRadioGroup>();
 
   public ngAfterViewInit (): void {
-    this._changeSubscription = this.trigger.change.subscribe((matRadioChange: MatRadioChange): void => {
+    this._changeSubscription = this.trigger().change.subscribe((matRadioChange: MatRadioChange): void => {
       this._toggleRef.showName(matRadioChange.value as string);
     });
   }

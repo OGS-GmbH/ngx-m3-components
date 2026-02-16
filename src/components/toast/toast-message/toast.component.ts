@@ -3,6 +3,13 @@ import { MatButtonModule } from "@angular/material/button";
 import { ToastService } from '../../../services/toast/toast.service';
 import { STATUS_TYPES, StatusType } from '../../../types/toast/toast.types';
 
+/**
+ * ToastComponent is a component responsible for rendering a single toast message. It receives the toast data as inputs and renders the toast accordingly.
+ *
+ * @category Components
+ * @author Ian Wenneckers
+ * @since 1.1.0
+ */
 @Component({
   selector: 'ogs-m3-toast',
   standalone: true,
@@ -14,9 +21,9 @@ import { STATUS_TYPES, StatusType } from '../../../types/toast/toast.types';
 export class ToastComponent {
   private _toastService: ToastService = inject(ToastService);
 
-  public id: InputSignal<string> = input.required();
+  public readonly id: InputSignal<string> = input.required();
 
-  public status: InputSignal<StatusType> = input(STATUS_TYPES.NEUTRAL as StatusType);
+  public readonly status: InputSignal<StatusType> = input(STATUS_TYPES.NEUTRAL as StatusType);
 
   protected statusTypes: typeof STATUS_TYPES = STATUS_TYPES;
 

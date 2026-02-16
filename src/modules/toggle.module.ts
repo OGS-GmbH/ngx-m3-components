@@ -14,9 +14,7 @@ import { ElementRefToggleTriggerDirective, MatRadioGroupRefToggleTriggerDirectiv
 /* eslint-disable @tseslint/no-extraneous-class */
 @NgModule({
   imports: [
-    CommonModule
-  ],
-  declarations: [
+    CommonModule,
     ToggleComponent,
     ToggleChildComponent,
     ElementRefToggleTriggerDirective,
