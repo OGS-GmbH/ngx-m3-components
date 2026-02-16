@@ -27,9 +27,9 @@
 		}
 	},
 	"repository": {
-    "type": "git",
-    "url": "https://github.com/OGS-GmbH/ngx-m3-components"
-  },
+		"type": "git",
+		"url": "https://github.com/OGS-GmbH/ngx-m3-components"
+	},
 	"scripts": {
 		"ci:build:main:production": "ng build",
 		"ci:docs:extract:typedoc": "typedoc",

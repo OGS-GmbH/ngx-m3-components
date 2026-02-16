@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/OGS-GmbH/ngx-m3-components/compare/v1.4.0...v2.0.0) (2026-02-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to angular 21 ([#15](https://github.com/OGS-GmbH/ngx-m3-components/issues/15))
+
+### Miscellaneous Chores
+
+* upgrade to angular 21 ([#15](https://github.com/OGS-GmbH/ngx-m3-components/issues/15)) ([7f4f23d](https://github.com/OGS-GmbH/ngx-m3-components/commit/7f4f23dd6f380d00622f9daf6dd36fb7fa81119d))
+
 ## [1.4.0](https://github.com/OGS-GmbH/ngx-m3-components/compare/v1.3.1...v1.4.0) (2026-01-14)
 
 
