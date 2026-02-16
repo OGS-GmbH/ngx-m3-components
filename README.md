@@ -4,9 +4,9 @@
 
 ![Preview](./docs/preview.avif)
 
-<a href="./LICENSE" target="_blank"><img src="https://img.shields.io/github/license/OGS-GmbH/ngx-m3-components?color=0f434e&logo=hackthebox&logoColor=000000&labelColor=ffffff" /></a>
-<a href="https://github.com/OGS-GmbH/ngx-translate/actions/workflows/main-deploy.yml" target="_blank"><img src="https://img.shields.io/github/actions/workflow/status/OGS-GmbH/ngx-m3-components/main-deploy.yml?color=0f434e&logo=rocket&logoColor=000000&labelColor=ffffff" /></a>
-<a href="https://www.npmjs.com/package/@ogs-gmbh/ngx-m3-components" target="_blank"><img src="https://img.shields.io/npm/v/%40ogs-gmbh%2Fngx-m3-components?color=0f434e&logo=npm&logoColor=000000&labelColor=ffffff" /></a>
+<a href="./LICENSE" target="_blank"><img alt="license badge" src="https://img.shields.io/github/license/OGS-GmbH/ngx-m3-components?color=0f434e&logo=hackthebox&logoColor=000000&labelColor=ffffff" /></a>
+<a href="https://github.com/OGS-GmbH/ngx-translate/actions/workflows/main-deploy.yml" target="_blank"><img alt="workflow badge" src="https://img.shields.io/github/actions/workflow/status/OGS-GmbH/ngx-m3-components/main-deploy.yml?color=0f434e&logo=rocket&logoColor=000000&labelColor=ffffff" /></a>
+<a href="https://www.npmjs.com/package/@ogs-gmbh/ngx-m3-components" target="_blank"><img alt="npm badge" src="https://img.shields.io/npm/v/%40ogs-gmbh%2Fngx-m3-components?color=0f434e&logo=npm&logoColor=000000&labelColor=ffffff" /></a>
 
 - **Material Design 3 compliant**\
   Fully aligned with Material M3 guidelines
