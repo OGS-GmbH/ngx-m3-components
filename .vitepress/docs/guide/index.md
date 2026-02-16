@@ -1,12 +1,15 @@
+---
+prev: false
+next: false
+---
+
 # Getting started
 
 ## Installation
 
-### Prerequisites
-
-- Node.js version 18 or higher.
+- Node.js version 18 or higher
+- An Angular project
 - A package manager: e.g. npm, pnpm, ...
-- To get started, you can install this package using your preferred package manager.
 
 ::: code-group
 
@@ -15,19 +18,18 @@ $ npm install @ogs-gmbh/ngx-m3-components
 ```
 
 ```sh [pnpm]
-$ pnpm install @ogs-gmbh/ngx-m3-components
+$ pnpm add @ogs-gmbh/ngx-m3-components
 ```
 
 ```sh [yarn]
-$ yarn install @ogs-gmbh/ngx-m3-components
+$ yarn add @ogs-gmbh/ngx-m3-components
 ```
 
 ```sh [bun]
-$ bun install @ogs-gmbh/ngx-m3-components
+$ bun add @ogs-gmbh/ngx-m3-components
 ```
 
 :::
-
 
 ### Usage
 
