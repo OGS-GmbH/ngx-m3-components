@@ -1,6 +1,6 @@
 {
 	"name": "@ogs-gmbh/ngx-m3-components",
-	"version": "1.4.0",
+	"version": "2.0.0",
 	"description": "A collection of reusable, customizable UI components built with Angular and Material 3.",
 	"keywords": [
 		"angular",
@@ -79,13 +79,13 @@
 		"@angular/forms": "^21",
 		"@angular/platform-browser": "^21",
 		"@angular/router": "^21",
-    "@angular/cdk": "^21",
-    "@angular/animations": "^21",
-    "@angular/material": "^21",
-    "@fortawesome/fontawesome-common-types": "^7",
-    "@fortawesome/angular-fontawesome": "^4",
-    "@fortawesome/fontawesome-svg-core": "^7",
-    "@ogs-gmbh/ngx-utils": "^2",
+		"@angular/cdk": "^21",
+		"@angular/animations": "^21",
+		"@angular/material": "^21",
+		"@fortawesome/fontawesome-common-types": "^7",
+		"@fortawesome/angular-fontawesome": "^4",
+		"@fortawesome/fontawesome-svg-core": "^7",
+		"@ogs-gmbh/ngx-utils": "^2",
 		"rxjs": "~7.8"
 	},
 	"sideEffects": false,
