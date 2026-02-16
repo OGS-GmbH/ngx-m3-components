@@ -1,5 +1,34 @@
 # Changelog
 
+## [3.0.0](https://github.com/OGS-GmbH/ngx-m3-components/compare/v2.0.0...v3.0.0) (2026-02-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to angular 21 ([#15](https://github.com/OGS-GmbH/ngx-m3-components/issues/15))
+
+### Features
+
+* added fontawesome registry auth token ([94ae9d7](https://github.com/OGS-GmbH/ngx-m3-components/commit/94ae9d70cde5cfcd7cc182c35535ddbee4f2a095))
+* **icon-theme:** add interop for icon spacing in material components ([#13](https://github.com/OGS-GmbH/ngx-m3-components/issues/13)) ([940d2ae](https://github.com/OGS-GmbH/ngx-m3-components/commit/940d2ae4b7167a36b47b2e8c60628a716415c9ec))
+* init ([ff37c8e](https://github.com/OGS-GmbH/ngx-m3-components/commit/ff37c8e56f6992d4234b33c5fe45e9028613a691))
+* **number-input-directive:** add key bypass ([#5](https://github.com/OGS-GmbH/ngx-m3-components/issues/5)) ([873c52f](https://github.com/OGS-GmbH/ngx-m3-components/commit/873c52f031d146c9fa256523ad8072eb4333f55a))
+* **otp:** add ([d527641](https://github.com/OGS-GmbH/ngx-m3-components/commit/d527641f1bd17923998f86c9571cf5ebce17d7a5))
+* **toast:** add ([d8bbc21](https://github.com/OGS-GmbH/ngx-m3-components/commit/d8bbc21f242b22e29262635155d779abf6deae2c))
+* **toggle:** ng-templates ([c27f3fb](https://github.com/OGS-GmbH/ngx-m3-components/commit/c27f3fb8305fb7dc190e63cb7e7cae7d26b152cb))
+
+
+### Bug Fixes
+
+* **icon-button:** remove mat-button requirement ([eacbe87](https://github.com/OGS-GmbH/ngx-m3-components/commit/eacbe8726ec3f023c9d0ff63e25362695220c87b))
+* package metadata ([9512b09](https://github.com/OGS-GmbH/ngx-m3-components/commit/9512b09809c93af1c52efea9eefd19346250c00d))
+* **toast:** change origin of ngx-m3-theme import ([32ff3e3](https://github.com/OGS-GmbH/ngx-m3-components/commit/32ff3e376f3b8fd97bc3b9fd72ebcdc22d42378f))
+
+
+### Miscellaneous Chores
+
+* upgrade to angular 21 ([#15](https://github.com/OGS-GmbH/ngx-m3-components/issues/15)) ([4fad040](https://github.com/OGS-GmbH/ngx-m3-components/commit/4fad04005b5183b21454473f2f99ad9d7d5cc1de))
+
 ## [2.0.0](https://github.com/OGS-GmbH/ngx-m3-components/compare/v1.4.0...v2.0.0) (2026-02-16)
 
 
