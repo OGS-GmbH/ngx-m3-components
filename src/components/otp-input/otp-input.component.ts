@@ -23,6 +23,13 @@ import { isValueIgnored, shouldIgnoreKey } from "../../helpers/otp-input.helper"
 import { createFixedArray } from "../../helpers/array.helper";
 import { MatFormField } from "@angular/material/input";
 
+/**
+ * A multi-field input component that captures user input one character at a time.
+ *
+ * @category Components
+ * @since 1.3.0
+ * @author Simon Kovtyk
+ */
 @Component({
   selector: "ogs-m3-otp-input",
   templateUrl: "./otp-input.component.html",
@@ -158,6 +165,16 @@ export class OtpInputComponent implements ControlValueAccessor, Validator, After
     this._focusToPrevious(index);
   }
 
+  /* eslint-disable @jsdoc/check-line-alignment */
+  /**
+   * Restores focus to a specific cell based on the given direction (`forward`, `backward`, or `current`)
+   * 
+   * @param direction -  The direction to restore focus: "forward" to the next cell, "backward" to the previous cell, or "current" to the current cell
+   *
+   * @since 1.0.0
+   * @author Simon Kovtyk
+   */
+  /* eslint-enable @jsdoc/check-line-alignment */
   public restoreFocus (direction?: "forward" | "backward" | "current"): void {
     if (direction === "forward") return void this._focusToNext(this._currentInputIndex);
 
@@ -166,6 +183,13 @@ export class OtpInputComponent implements ControlValueAccessor, Validator, After
     this._focusToIndex(this._currentInputIndex);
   }
 
+  /**
+   * Sets char to the cell
+   * @param char - The character to set in the current cell
+   *
+   * @since 1.0.0
+   * @author Simon Kovtyk
+   */
   public setChar (char: string): void {
     // eslint-disable-next-line @tseslint/no-unnecessary-condition
     if (this._currentInputIndex === null) return;
@@ -195,6 +219,14 @@ export class OtpInputComponent implements ControlValueAccessor, Validator, After
     this._onValidatorChange = callback;
   }
 
+  /**
+   * Validates the current value against the allowed characters
+   * @param control - The form control to validate
+   * @returns An object with an `invalid` property set to `true` if the value contains invalid characters, or `null` if the value is valid
+   *
+   * @since 1.0.0
+   * @author Simon Kovtyk
+   */
   public validate (control: AbstractControl): ValidationErrors | null {
     // eslint-disable-next-line @tseslint/no-unsafe-assignment
     const value: string = control.value;

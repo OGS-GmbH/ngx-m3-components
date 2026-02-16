@@ -7,6 +7,13 @@ import { BottomMargin, LeftMargin, RightMargin, ToastConfig, TopMargin, VIEW_POR
 import { UntypedToast } from "../../types/toast/toast.types";
 import { ToastAreaComponent } from "../../components/toast/toast-area/toast-area.component";
 
+/**
+ * Service responsible for displaying, managing, and closing toasts.
+ * @category Services
+ *
+ * @since 1.2.1
+ * @author Simon Kovtyk
+ */
 @Injectable({
   providedIn: "root"
 })
@@ -25,9 +32,10 @@ export class ToastService {
   }
 
   /**
-   * Show a toast
-   * @param toast - the toast to display
+   * Displays a toast
+   * @remarks Returns the assigned id of the toast
    *
+   * @param toast - The toast data to show
    * @returns The assigned id of the toast
    */
   public show (toast: UntypedToast): string {

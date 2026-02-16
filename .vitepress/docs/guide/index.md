@@ -31,6 +31,8 @@ $ bun add @ogs-gmbh/ngx-m3-components
 
 :::
 
-## Usage
+### Usage
 
-Since the usage may vary, it is recommended to consult the [reference](/reference).
+Integrate the Components package into your Angular project by importing the desired modules from the library. Each component is designed to work seamlessly with Angular Material 3, allowing you to quickly build consistent, responsive, and accessible UIs. Customize the components via inputs, outputs, and theming options to match your application’s design system.
+
+Please follow our specific guides to understand and unlock the full potential.

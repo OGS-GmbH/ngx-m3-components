@@ -7,6 +7,13 @@ import { ToastConfig, ToastRendererDef } from '../../../types/toast/toast-config
 import { TOAST_INJECTION_TOKEN } from '../../../tokens/toast.token';
 import { UntypedToast } from '../../../types/toast/toast.types';
 
+/**
+ * ToastAreaComponent is a component responsible for rendering the toasts. It subscribes to the toast store and renders the toasts accordingly.
+ *
+ * @category Components
+ * @author Ian Wenneckers
+ * @since 1.1.0
+ */
 @Component({
   selector: 'ogs-m3-toast-area',
   standalone: true,

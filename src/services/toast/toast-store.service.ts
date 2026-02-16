@@ -7,6 +7,12 @@ import { TOAST_INJECTION_TOKEN } from "../../tokens/toast.token";
 
 const DEFAULT_DURATION: number = 6000;
 
+/**
+ * Toast store
+ *
+ * @author Ian Wenneckers
+ * @since 1.1.0
+ */
 @Injectable({
   providedIn: "root"
 })
@@ -17,7 +23,10 @@ export class ToastStoreService {
   private _toasts$: BehaviorSubject<UntypedToast[]> = new BehaviorSubject<UntypedToast[]>([]);
 
   /**
-   * The observable of the toast-store. is throttled to schedule possible animations of the toast.
+   * The `Observable` of the toast-store. is throttled to schedule possible animations of the toast.
+   *
+   * @author Ian Wenneckers
+   * @since 1.1.0
    */
   public toasts$: Observable<UntypedToast[]> = this._toasts$.asObservable().pipe(
     throttleTime(0, animationFrameScheduler, { leading: true, trailing: true })
@@ -29,6 +38,9 @@ export class ToastStoreService {
    * Adds a toast to the store. And if the toast has a Time To Live (TTL) a timer gets started to clean up the toast after given duration.
    * if the max number of Toasts is reached removes the first one from the store.
    * @param toast - toast to add
+   *
+   * @author Ian Wenneckers
+   * @since 1.1.0
    */
   public addToast (toast: UntypedToast): void {
     if (!toast.id) return;
@@ -51,6 +63,9 @@ export class ToastStoreService {
   /**
    * Removes a toast from the store and cleans up any remaining timer subscription
    * @param toastId - the id of the toast to remove
+   *
+   * @author Ian Wenneckers
+   * @since 1.1.0
    */
   public removeToast (toastId: string): void {
     this._toasts$.next(this._toasts$.getValue().filter((toast: UntypedToast) => toast.id !== toastId));

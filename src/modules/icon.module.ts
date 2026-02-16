@@ -7,6 +7,13 @@ import { ObserversModule } from "@angular/cdk/observers";
 import { provideIconDefaultPrefix } from "../providers/icon.provider";
 import { IconConfiguration } from "../types/icon.type";
 
+/**
+ * IconModule is a module providing the IconComponent.
+ * @category Modules
+ *
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 /* eslint-disable @tseslint/no-extraneous-class */
 @NgModule({
   imports: [

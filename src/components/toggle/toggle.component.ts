@@ -2,6 +2,13 @@ import { ChangeDetectionStrategy, Component, booleanAttribute, AfterViewInit, Wr
 import { ToggleChange } from "./toggle.type";
 import { ToggleChildComponent } from "./toggle-child.component";
 
+/**
+ * A simple switch component that allows the user to toggle between two states (on/off, true/false).
+ *
+ * @category Components
+ * @since 1.1.0
+ * @author Simon Kovtyk
+ */
 @Component({
   selector: "ogs-m3-toggle",
   templateUrl: "./toggle.component.html",
@@ -48,6 +55,13 @@ export class ToggleComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  /**
+   * Activates the toggle child at the given name
+   * @param visibleName - The name of the child to activate
+   *
+   * @since 1.0.0
+   * @author Simon Kovtyk
+   */
   public showName (visibleName: string): void {
     this.children().forEach((toggleChild: ToggleChildComponent, index: number): void => {
       if (toggleChild.name() !== visibleName)
@@ -68,6 +82,13 @@ export class ToggleComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  /**
+   * Activates the toggle child at the given index
+   * @param visibleIndex - The index of the child to activate
+   *
+   * @since 1.0.0
+   * @author Simon Kovtyk
+   */
   public showIndex (visibleIndex: number): void {
     this.children().forEach((toggleChild: ToggleChildComponent, index: number): void => {
       if (index !== visibleIndex)
@@ -88,6 +109,12 @@ export class ToggleComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  /**
+   * Moves the toggle to display the next item
+   *
+   * @since 1.0.0
+   * @author Simon Kovtyk
+   */
   public showNext (): void {
     const index: number = this._index();
     const nextIndex: number = index === this.children.length - 1
@@ -97,6 +124,12 @@ export class ToggleComponent implements AfterViewInit, OnDestroy {
     this.showIndex(nextIndex);
   }
 
+  /**
+   * Moves the toggle to display the previous item
+   *
+   * @since 1.0.0
+   * @author Simon Kovtyk
+   */
   public showPrevious (): void {
     const index: number = this._index();
     const nextIndex: number = index === 0
@@ -106,6 +139,12 @@ export class ToggleComponent implements AfterViewInit, OnDestroy {
     this.showIndex(nextIndex);
   }
 
+  /**
+   * Toggle's action
+   *
+   * @since 1.0.0
+   * @author Simon Kovtyk
+   */
   public toggle (): void {
     this.reverse()
       ? this.showPrevious()

@@ -6,6 +6,15 @@ type BypassKey = {
   name: string;
 };
 
+/**
+ * Directive that restricts user input to numeric characters.
+ * Non-numeric key presses are blocked unless the key is included in the
+ * internal bypass list (e.g., navigation keys, shortcuts).
+ * @category Directives
+ *
+ * @since 1.2.0
+ * @author Simon Kovtyk
+ */
 @Directive({
   selector: "input[ogsNumberInput]",
   standalone: true
@@ -41,6 +50,13 @@ export class NumberInputDirective {
     }
   ];
 
+  /**
+   * Handles keydown events on the host element and prevents any key that is not a valid number and not part of the allowed bypass keys.
+   * @param keyboardEvent - The keyboard event triggered by the user's key press.
+   *
+   * @since 1.2.0
+   * @author Simon Kovtyk
+   */
   @HostListener("keydown", [ "$event" ])
   public handleInput (keyboardEvent: KeyboardEvent): void {
     let bypass: boolean = false;

@@ -43,7 +43,24 @@ export default defineConfig({
       {
         text: "Guide",
         items: [
-          { text: "Getting started", link: "/guide/" },
+          { text: "Getting started", link: "/guide/" }
+        ]
+      },
+      {
+        text: "Components",
+        items: [
+          {
+            text: "Icon",
+            link: "/components/icon/"
+          },
+          {
+            text: "One-time-password input",
+            link: "/components/otp-input/"
+          },
+          {
+            text: "Skeleton",
+            link: "/components/skeleton/"
+          }
         ]
       },
       sidebarPlugin({
