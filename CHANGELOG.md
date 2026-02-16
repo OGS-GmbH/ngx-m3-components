@@ -9,6 +9,17 @@
 
 ### Miscellaneous Chores
 
+* upgrade to angular 21 ([#15](https://github.com/OGS-GmbH/ngx-m3-components/issues/15)) ([39e6d90](https://github.com/OGS-GmbH/ngx-m3-components/commit/39e6d907500be76f5c6742330a94e43f7bfcbc27))
+
+## [2.0.0](https://github.com/OGS-GmbH/ngx-m3-components/compare/v1.4.0...v2.0.0) (2026-02-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to angular 21 ([#15](https://github.com/OGS-GmbH/ngx-m3-components/issues/15))
+
+### Miscellaneous Chores
+
 * upgrade to angular 21 ([#15](https://github.com/OGS-GmbH/ngx-m3-components/issues/15)) ([bb94cd2](https://github.com/OGS-GmbH/ngx-m3-components/commit/bb94cd2e0ea235b4e85f1740456adb60457fbade))
 
 ## [1.4.0](https://github.com/OGS-GmbH/ngx-m3-components/compare/v1.3.1...v1.4.0) (2026-01-14)
