@@ -1,4 +1,4 @@
-name: PR Review
+name: PR review
 on:
   pull_request:
     types: [
@@ -10,4 +10,4 @@ on:
 
 jobs:
   call-npm-package-pr-checks:
-    uses: OGS-GmbH/reusable-github-actions/.github/workflows/npm-package-pr-checks.yml@main
+    uses: OGS-GmbH/reusable-github-actions/.github/workflows/npm-package-pr-checks.yml@v1.1.2

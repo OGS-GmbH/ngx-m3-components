@@ -3,14 +3,14 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "boilerplate": {
+    "ngx-m3-components": {
       "projectType": "library",
       "root": "./",
       "sourceRoot": "./src",
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "configurations": {
             "default": {
 							"project": "./ng-package.json",

@@ -9,7 +9,7 @@ import { AfterViewInit, Directive, ElementRef, Host, Renderer2, inject } from "@
  * @author Simon Kovtyk
  */
 @Directive({
-  selector: "mat-radio-button[ogs-m3-radio-badge]"
+  selector: "mat-radio-button[ogsM3RadioBadge]"
 })
 export class RadioBadgeDirective implements AfterViewInit {
   @Host()

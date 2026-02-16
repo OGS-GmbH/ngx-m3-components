@@ -1,4 +1,4 @@
-name: next bump
+name: main bump
 on:
   workflow_dispatch:
 
@@ -12,6 +12,6 @@ jobs:
     secrets:
       GH_DEPLOY_TOKEN: ${{ secrets.GH_DEPLOY_TOKEN }}
     with:
-      config_file: ".release-please/next-config.json"
-      manifest_file: ".release-please/next-manifest.json"
-      target_branch: "next"
+      config_file: ".release-please/main-config.json"
+      manifest_file: ".release-please/main-manifest.json"
+      target_branch: "main"
