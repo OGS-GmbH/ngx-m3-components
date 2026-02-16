@@ -1,3 +1,8 @@
+---
+prev: false
+next: false
+---
+
 # Contributor Covenant Code of Conduct
 
 ## Our Pledge

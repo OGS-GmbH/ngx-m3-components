@@ -1,5 +1,5 @@
 /**
- *  Predefined status types for use throughout the application. These values can be used to indicate the current state of an operation, component, or process.
+ * Predefined status types for use throughout the application. These values can be used to indicate the current state of an operation, component, or process.
  * @category Types
  * @readonly
  *

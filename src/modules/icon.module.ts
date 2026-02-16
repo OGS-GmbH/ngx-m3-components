@@ -17,17 +17,10 @@ import { IconConfiguration } from "../types/icon.type";
 /* eslint-disable @tseslint/no-extraneous-class */
 @NgModule({
   imports: [
-    // @angular modules
     CommonModule,
-
-    // @angular/cdk modules
     ObserversModule,
-
-    // Dependency modules
     FontAwesomeModule,
-    MatRippleModule
-  ],
-  declarations: [
+    MatRippleModule,
     IconComponent
   ],
   exports: [

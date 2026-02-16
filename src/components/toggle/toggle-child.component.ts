@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, Input, OnDestroy, TemplateRef, ViewChild } from "@angular/core";
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, input, InputSignal, OnDestroy, Signal, TemplateRef, viewChild } from "@angular/core";
 
 /**
  * Represents a single child item of a `ToggleComponent`.
@@ -18,18 +18,22 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject, Input, OnDestro
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToggleChildComponent implements OnDestroy {
-  @Input({ required: false })
-  public name?: string;
+  public readonly name: InputSignal<string | undefined> = input<string | undefined>();
 
-  @ViewChild(TemplateRef)
-  public templateRef!: TemplateRef<unknown>;
+  public readonly templateRef: Signal<TemplateRef<unknown>> = viewChild.required(TemplateRef);
 
   /** Reference used to clean up resources when this component is destroyed. */
   public destroyRef: DestroyRef = inject(DestroyRef);
 
   private _destroyHandlers: Array<() => void> | null = null;
 
-  /** Registers a callback to run when the component is destroyed */
+  /**
+   * Registers a callback to run when the component is destroyed
+   * @param handler - The callback function to execute on component destruction
+   *
+   * @since 1.0.0
+   * @author Simon Kovtyk
+   */
   public addDestroyHandler (handler: () => void): void {
     this._destroyHandlers === null
       ? this._destroyHandlers = [ handler ]

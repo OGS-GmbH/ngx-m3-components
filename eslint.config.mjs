@@ -5,29 +5,27 @@ import {
   ANGULAR_TEMPLATE_RULES_PRESET,
   getAngularTsPreset
 } from "@ogs-gmbh/linter";
-import eslintJson from "@eslint/json";
-import eslintMarkdown from "@eslint/markdown";
 import globals from "globals";
-import stylisticJs from "@stylistic/eslint-plugin-js";
-import stylisticPlus from "@stylistic/eslint-plugin-plus";
-import stylisticTs from "@stylistic/eslint-plugin-ts";
-import tseslint from "typescript-eslint";
-import unicorn from "eslint-plugin-unicorn";
-import angular from "angular-eslint";
+import stylisticPlugin from "@stylistic/eslint-plugin";
+import unicornPlugin from "eslint-plugin-unicorn";
+import jsdocPlugin from "eslint-plugin-jsdoc";
+import eslintMarkdown from "@eslint/markdown";
+import tseslintPlugin from "typescript-eslint";
+import angularPlugin from "angular-eslint";
+import eslintJsonPlugin from "@eslint/json";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig(
   {
     plugins: {
-      "@tseslint": tseslint.plugin,
-      "@unicorn": unicorn,
-      "@stylistic/js": stylisticJs,
-      "@stylistic/ts": stylisticTs,
-      "@stylistic/plus": stylisticPlus,
       "@markdown": eslintMarkdown,
-      "@json": eslintJson,
-      "@angular": angular.tsPlugin,
-      "@angular-template": angular.templatePlugin
+      "@tseslint": tseslintPlugin.plugin,
+      "@stylistic": stylisticPlugin,
+      "@unicorn": unicornPlugin,
+      "@jsdoc": jsdocPlugin,
+      "@json": eslintJsonPlugin,
+      "@angular": angularPlugin.tsPlugin,
+      "@angular-template": angularPlugin.templatePlugin
     }
   },
   {
@@ -36,52 +34,46 @@ export default defineConfig(
       ".git",
       ".husky",
       ".idea",
+      ".vscode",
       "node_modules",
       "dist",
-      "CHANGELOG.md",
-      "README.md",
       ".vitepress/.vitepress/cache"
     ]
   },
   {
-    files: [ "**/*.html" ],
-    rules: ANGULAR_TEMPLATE_RULES_PRESET,
+    files: [
+      "**/*.ts",
+      "**/*.cts",
+      "**/*.mts"
+    ],
+    processor: angularPlugin.processInlineTemplates,
     languageOptions: {
-      globals: { ...globals.browser },
-      parser: angular.templateParser
-    }
-  },
-  {
-    files: [ "**/*.ts" ],
-    processor: angular.processInlineTemplates,
-    languageOptions: {
-      parser: tseslint.parser,
-      globals: { ...globals.browser },
+      parser: tseslintPlugin.parser,
+      globals: globals.browser,
       parserOptions: {
-        tsconfigRootDir: import.meta.dirname,
         projectService: {
           allowDefaultProject: [
             ".vitepress/.vitepress/*",
             ".vitepress/.vitepress/theme/*"
           ]
-        }
+        },
+        tsconfigRootDir: import.meta.dirname
       }
     },
     rules: getAngularTsPreset({
-      selectorPrefix: "ogs-m3"
+      selectorPrefix: "ogs"
     })
   },
   {
-    files: [ "**/*.js", "**/*.mjs", "**/*.cjs" ],
-    rules: JS_RULES_PRESET
-  },
-  {
-    files: [ "**/*.md" ],
-    language: "@markdown/commonmark",
+    files: [
+      "**/*.js",
+      "**/*.cjs",
+      "**/*.mjs"
+    ],
     languageOptions: {
-      frontmatter: "yaml"
+      globals: globals.browser
     },
-    rules: ESLINT_MARKDOWN_RULES
+    rules: JS_RULES_PRESET
   },
   {
     files: [ "**/*.json" ],
@@ -97,5 +89,20 @@ export default defineConfig(
     files: [ "**/*.jsonc" ],
     language: "@json/jsonc",
     rules: ESLINT_JSON_RULES
+  },
+  {
+    files: [ "**/*.html" ],
+    languageOptions: {
+      parser: angularPlugin.templateParser
+    },
+    rules: ANGULAR_TEMPLATE_RULES_PRESET
+  },
+  {
+    files: [ "**/*.md" ],
+    rules: ESLINT_MARKDOWN_RULES,
+    language: "@markdown/gfm",
+    languageOptions: {
+      frontmatter: "yaml"
+    }
   }
 );
